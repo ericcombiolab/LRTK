@@ -1,5 +1,4 @@
-# LRTK
-A unified and versatile toolkit for analyzing Linked-Read sequencing data
+# LRTK: a unified ToolKit for Linked-Read sequencing data
 # Overview
  LRTK consist of 4 sections: format conversion of FASTQ files, barcode-aware read alignment, quality control and downstream analysis modules. It can accept multiple linked-read format, including sequencing data from 10x genomics, stLFR, and TELL-Seq technologies. In the downstream analysis section, LRTK includes a variety of tools to the detect and phase multiple variations, such as SNPs, INDELs, and SVs.
  
@@ -14,12 +13,13 @@ LRTK -h
 ## dependencies
 LRTK utilizes python3 to execute the programs and requires some python packages, including numpy, pysam, scipy and sortedcontainers. some commonly used bioinformatics tools, such as SAMtools and minimap2, should be included in the path environment variable. Or you could directly install them through binconda.
 ```
-conda install samtools
-conda install bwa
-conda install Aquila
-conda install freebayes
-conda install bcftools
-conda install HapCut2
+conda install -c bioconda aquila
+conda install -c bioconda bcftools
+conda install -c bioconda bwa
+conda install -c bioconda fastp
+conda install -c bioconda freebayes
+conda install -c bioconda hapcut2
+conda install -c bioconda samtools
 ```
 If you would like to try the optional tools, such as LinkedSV, Valor, WhatSHAP, please make sure the program executables has been in one of the directories listed in the PATH environment variable (".bashrc").
 
