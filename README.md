@@ -28,7 +28,9 @@ conda install -c bioconda vcflib
 If you would like to try the optional tools, such as LinkedSV, Valor, WhatSHAP, please make sure the program executables has been in one of the directories listed in the PATH environment variable (".bashrc").
 
 
-In addition, the reference GRCH38 genome and related files can be found on the website: 
+In addition, the reference GRCH38 genome and related databases can be found on the Zenodo (website: https://zenodo.org/deposit?page=1&size=20).
+The example data to generate a complete report can also be found on this website.
+
 # Running examples
 ## module1: format conversion across diverse linked-read data format
 ```
