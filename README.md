@@ -18,8 +18,12 @@ conda install -c bioconda bcftools
 conda install -c bioconda bwa
 conda install -c bioconda fastp
 conda install -c bioconda freebayes
+conda install -c bioconda gatk
 conda install -c bioconda hapcut2
+conda install -c bioconda parallel
+conda install -c bioconda picard
 conda install -c bioconda samtools
+conda install -c bioconda vcflib
 ```
 If you would like to try the optional tools, such as LinkedSV, Valor, WhatSHAP, please make sure the program executables has been in one of the directories listed in the PATH environment variable (".bashrc").
 
