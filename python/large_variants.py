@@ -2,6 +2,7 @@ import getopt
 import multiprocessing
 import os
 import subprocess
+from utility import *
 
 def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 	###########################################################################
@@ -13,6 +14,7 @@ def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split(outdir + "/" + outfile)
 
 	#temp paths and files
 	tmp_region  = outdir + "/regions.bed"
@@ -34,7 +36,7 @@ def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 			"--uniq_map_dir", umap, 
 			"--num_threads_for_samtools_sort", threads, 
 			"--out_dir", outdirchr, 
-			"--num_threads", "5"
+			"--num_threads", "2"
 			],
 			"step1"
 		)
@@ -43,11 +45,11 @@ def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 			[
 			"Aquila_step2", 
 			"--reference", ref, 
-			"--num_threads", "5", 
+			"--num_threads", threads, 
 			"--chr_start", chrom, 
 			"--chr_end", chrom, 
 			"--out_dir", outdirchr, 
-			"--num_threads_spades", "5"
+			"--num_threads_spades", "2"
 			],
 			"step2"
 		)
@@ -66,18 +68,18 @@ def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 			"variants_call"
 		)
 
-		run_cmd(
-			[
-			"Aquila_phasing_all_variants", 
-			"--assembly_vcf", outdirchr + "/VariantsResults/Aquila_final_sorted.vcf", 
-			"--vcf_file", vcf, 
-			"--assembly_dir", outdirchr,
-			"--chr_start", chrom, 
-			"--chr_end", chrom, 
-			"--out_dir", outdirchr + "/Aquila_Phasing_Results"
-			],
-			"phasing_variants"
-		)
+		#run_cmd(
+		#	[
+		#	"Aquila_phasing_all_variants", 
+		#	"--assembly_vcf", outdirchr + "/VariantsResults/Aquila_final_sorted.vcf", 
+		#	"--vcf_file", vcf, 
+		#	"--assembly_dir", outdirchr,
+		#	"--chr_start", chrom, 
+		#	"--chr_end", chrom, 
+		#	"--out_dir", outdirchr + "/Aquila_Phasing_Results"
+		#	],
+		#	"phasing_variants"
+		#)
 	
 		run_cmd(
 			[
@@ -86,6 +88,19 @@ def calling_Aquila(bam, vcf, ref, umap, threads, outfile, bin):
 			],
 			"clean"
 		)
+	
+	##Merge final vcf
+	cmd="cat " 
+	for i in range(23):
+		chrom= str(i+1)
+		cmd= cmd + outdir + "/CHR" + chrom + "/VariantsResults/Aquila_final_sorted.vcf "
+	
+	cmd=cmd+ " > " + tmp_vcf
+	print(cmd)
+	subprocess.call(cmd, shell=True)
+	cmd="python " + bin + "/python/Reformat.py" + " -r " + ref + " -i " + tmp_vcf + " -o " + outfile + " --add_header 38 --base_norm --gz_tbi"
+	print(cmd)
+	subprocess.call(cmd, shell=True)
 
 
 def calling_LinkedSV(bam, ref, threads, outfile, bin):
@@ -97,13 +112,11 @@ def calling_LinkedSV(bam, ref, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split(outdir + "/" + outfile)
 
+	linkedsv= bin + "/src/" + "LinkedSV/linkedsv.py"
 	#Variation calling
-	subprocess.call(["python", "linkedsv.py", "-i", bam, "-d", outdir, "-r", ref, "-v", "hg38", "-t", "64", "--germline_mode"])
-	#subprocess.call(["freebayes-parallel", tmp_region, threads, "-f", ref, bam, ">", tmp_vcf])
-
-	#Filteration
-	#subprocess.call(["samtools", "aln", white_list, bc_fq, "-f", bc_sai])
+	subprocess.call(["python", linkedsv, "-i", bam, "-d", outdir, "-r", ref, "-v", "hg38", "-t", threads, "--germline_mode"])
 
 	
 def calling_VALOR(bam, ref, sonic, threads, outfile, bin):
@@ -115,11 +128,9 @@ def calling_VALOR(bam, ref, sonic, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split(outdir + "/" + outfile)
 
-
+	valor= bin + "/src/valor/valor"
 	#Variation calling
-	subprocess.call(["valor", "-i", bam, "-o", outdir, "-s", sonic, "-f", "DUP,DEL", "-t", threads])
-	#subprocess.call(["freebayes-parallel", tmp_region, threads, "-f", ref, bam, ">", tmp_vcf])
+	subprocess.call([valor, "-i", bam, "-o", outdir, "-s", sonic, "-f", "INV,DUP,IDUP,TRA,ITRA,DEL", "-t", threads])
 
-	#Filteration
-	#subprocess.call(["samtools", "aln", white_list, bc_fq, "-f", bc_sai])	

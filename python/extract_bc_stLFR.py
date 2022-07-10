@@ -3,7 +3,7 @@ import sys
 
 def main(argv):
     inFile = argv[1]
-    outFile = argv[2] + "_read1_only.fq"
+    outFile = argv[2] + "_read2_only.fq"
     outbc1 = argv[2] + "_bc1.fq"
     outbc2 = argv[2] + "_bc2.fq"
     outbc3 = argv[2] + "_bc3.fq"

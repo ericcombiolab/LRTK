@@ -202,7 +202,7 @@ def read_fragment_matrix(frag_matrix, vcf_file, chrom_filter=None):
 
     flist = []
 
-    with open(frag_matrix,"r") as fm:
+    with open(frag_matrix,"r",encoding="latin-1",errors='ignore') as fm:
         for line in fm:
             if len(line) < 2:
                 continue
@@ -290,14 +290,17 @@ def parse_bedfile(input_file):
             barcode = el[3]
             yield (chrom, start, stop, barcode)
 
-def link_fragments(hairs_file, vcf_file, bam_file, outfile, dist, single_SNP_frags):
+def link_fragments(hairs_file, vcf_file, bam_file, outfile, dist, single_SNP_frags,maxbq):
 
     lines = []
 
-    if not (os.path.isfile(bam_file+'.bai')):
-        print("Bam file must be indexed.")
-        exit(1)
-
+    try:
+        with pysam.AlignmentFile(bam_file, "rb") as alignment:
+            if not alignment.check_index():
+                raise AttributeError("Alignment must be indexed")
+    except (AttributeError, ValueError) as ex:
+        exit(str(ex))
+    
     chroms = []
     chrom_set = set()
     with open(vcf_file,'r') as infile:
@@ -379,15 +382,12 @@ def link_fragments(hairs_file, vcf_file, bam_file, outfile, dist, single_SNP_fra
                                         q2 = ord(new_fseq[i][3]) - 33
 
                                         Q = q1 + q2 # combined quality score
-                                        if Q > 93:
-                                            Q = 93
-
+                                        if Q > maxbq:
+                                            Q = maxbq;
                                         Q_char = chr(33 + Q)
-
                                         new_fseq[i] = (new_fseq[i][0], new_fseq[i][1], new_fseq[i][2], Q_char)
 
                                     else:
-
                                         del new_fseq[i]
                                         bad_snps.add(snp_ix)
 
@@ -467,7 +467,8 @@ def parseargs():
     parser.add_argument('-v', '--VCF', nargs='?', type = str, help='vcf file for phasing')
     parser.add_argument('-b', '--bam_file', nargs='?', type = str, help='bam file with barcoded reads')
     parser.add_argument('-o', '--outfile', nargs='?', type = str, help='output file with linked fragments')
-    parser.add_argument('-d', '--distance', nargs='?', type = int, help='distance in base pairs that delineates separate 10X molecules',default=20000)
+    parser.add_argument('-d', '--distance', nargs='?', type = int, help='distance in base pairs that delineates separate 10X molecules, default=20kb',default=20000)
+    parser.add_argument('-m', '--maxbq', nargs='?', type = int, help='maximum base quality for an allele call, default=40',default=40)
 
     parser.add_argument('-s', '--single_SNP_frags', action='store_true', help='whether to keep fragments overlapping only one SNP', default=False)
 
@@ -483,4 +484,4 @@ def parseargs():
 # parse input and run function to call alleles
 if __name__ == '__main__':
     args = parseargs()
-    link_fragments(args.fragments,args.VCF,args.bam_file, args.outfile, args.distance, args.single_SNP_frags)
+    link_fragments(args.fragments,args.VCF,args.bam_file, args.outfile, args.distance, args.single_SNP_frags,args.maxbq)

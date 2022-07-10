@@ -2,6 +2,7 @@ import getopt
 import multiprocessing
 import os
 import subprocess
+from utility import *
 
 def Phasing_HAPCUT2(bam, vcf, ref, threads, outfile, bin):
 	###########################################################################
@@ -11,6 +12,7 @@ def Phasing_HAPCUT2(bam, vcf, ref, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split( outdir + "/" + outfile)
 	
 	#temp paths and files
 	tmp_unlink  = outdir + "/tmp_unlinked_fragments"
@@ -64,6 +66,7 @@ def Phasing_WhatsHap(bam, vcf, ref, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split( outdir + "/" + outfile)
 
 	###final output
 	tmp_vcf     = outdir + "/phased.vcf"
@@ -73,8 +76,8 @@ def Phasing_WhatsHap(bam, vcf, ref, threads, outfile, bin):
 		[
 		"whatshap", 
 		"phase", 
-		"-o", tmp_vcf, 
-		"--reference=", ref, 
+		"-o", outfile, 
+		"-r", ref, 
 		vcf, bam
 		],
 		"WhatsHap",
@@ -90,6 +93,7 @@ def Phasing_SpecHap(bam,  vcf, ref, threads, outfile, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir, filename) = os.path.split( outdir + "/" + outfile)
 
 	#temp paths and files
 	tmp_region  = outdir + "/regions.bed"

@@ -17,6 +17,8 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		(outdir, filename2) = os.path.split(outfq2)
 	else:
 		outdir = os.getcwd()
+		filename1 = outfq1
+		filename2 = outfq2
 
 	#temp paths and files
 	bc_fq  = outdir + "/tmp_bc.fq"
@@ -27,16 +29,16 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 	tmp_out2 = outdir + "/tmp.read2_out.fq"
 	tmp_filt1 = outdir + "/tmp.read1.filt.fq"
 	tmp_filt2 = outdir + "/tmp.read2.filt.fq"
-	tmp_filt_sort_wb1  = outdir + "/" + filename1 + ".sort.wb.1.fq"
-	tmp_filt_sort_wob1 = outdir + "/" + filename1 + ".sort.wob.1.fq"
-	tmp_filt_sort_wb2  = outdir + "/" + filename2 + ".sort.wb.2.fq"
-	tmp_filt_sort_wob2 = outdir + "/" + filename2 + ".sort.wob.2.fq"
+	tmp_filt_sort_wb1  = outdir + "/" + filename1 + ".sort.wb.fq"
+	tmp_filt_sort_wob1 = outdir + "/" + filename1 + ".sort.wob.fq"
+	tmp_filt_sort_wb2  = outdir + "/" + filename2 + ".sort.wb.fq"
+	tmp_filt_sort_wob2 = outdir + "/" + filename2 + ".sort.wob.fq"
 	
-	reporthtml = outdir + "/FASTQ.QC.fastp.html"
-	reportjson = outdir + "/FASTQ.QC.fastp.json"
+	reporthtml = outdir + "/" + "FASTQ.QC.html"
+	reportjson = outdir + "/" + "FASTQ.QC.json"
 
 	#extract barcodes
-	logging("Extracting barcodes start.")
+	#logging("Extracting barcodes start.")
 	run_cmd([
 		"python", 
 		bin+"/python/extract_bc_10x.py",
@@ -46,10 +48,10 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		],
 		"Extract_barcodes"
 		)
-	logging("Extracting barcodes end.")
+	#logging("Extracting barcodes end.")
 
 	#align barcodes
-	logging("aligning barcodes start.")
+	#logging("aligning barcodes start.")
 	run_cmd(
 		[
 		"bwa",
@@ -74,10 +76,10 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		],
 		"samse_barcodes"
 	)
-	logging("aligning barcodes end.")
+	#logging("aligning barcodes end.")
 
 	#correct barcodes
-	logging("correcting barcodes start.")
+	#logging("correcting barcodes start.")
 	run_cmd(
 		[
 		"python", 
@@ -92,10 +94,10 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		],
 		"correct_barcodes"
 	)
-	logging("correcting barcodes end.")
+	#logging("correcting barcodes end.")
 
 	#Filt & sort barcodes
-	logging("fitering fastq start.")
+	#logging("fitering fastq start.")
 	if ((sort == "Yes") & (filt == "Yes")):
 		#filtering reads start
 		run_cmd(
@@ -105,9 +107,9 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 			"-I", tmp_out2, 
 			"-o", tmp_filt1, 
 			"-O", tmp_filt2, 
-			"-w", threads, 
+			"-w", "8", 
 			"-q", "20", 
-			"-u","50", 
+			"-u", "50", 
 			"-n", "10", 
 			"-l", "50",
 			"-h", reporthtml, 
@@ -118,7 +120,7 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		#filtering reads end
 	
 		#sorting reads by barcodes start
-		logging("sorting reads by barcodes start.")
+		#logging("sorting reads by barcodes start.")
 		cmd1 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt1 + " | grep \"BX:Z:\" | sort -k 2.1,2.21 -k 1,1 | tr \"\\t\" \"\\n\" > " + tmp_filt_sort_wb1
 		cmd2 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt1 + " | grep -v \"BX:Z:\" | sort -k 1,1 | tr \"\\t\" \"\\n\" >" + tmp_filt_sort_wob1
 		subprocess.call(cmd1, shell=True)
@@ -133,7 +135,7 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		cmd6 = "cat " + tmp_filt_sort_wb2 + " " + tmp_filt_sort_wob2 + " > " + outfq2
 		subprocess.call(cmd5, shell=True)
 		subprocess.call(cmd6, shell=True)
-		logging("sorting reads by barcodes end.")
+		#logging("sorting reads by barcodes end.")
 		
 		os.remove(tmp_out1)
 		os.remove(tmp_out2)
@@ -149,9 +151,9 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 			"-I", tmp_out2,
 			"-o", outfq1,
 			"-O", outfq2,
-			"-w", threads,
+			"-w", "8",
 			"-q", "20",
-			"-u","50",
+			"-u", "50",
 			"-n", "10",
 			"-l", "50",
 			"-h", reporthtml,
@@ -164,7 +166,7 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		os.remove(tmp_out2)		
 	elif (sort == "Yes"):
 		#sorting reads by barcodes start
-		logging("sorting reads by barcodes start.")
+		#logging("sorting reads by barcodes start.")
 		cmd1 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_out1 + " | grep \"BX:Z:\" | sort -k 2.1,2.21 -k 1,1 | tr \"\\t\" \"\\n\" > " + tmp_filt_sort_wb1
 		cmd2 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_out1 + " | grep -v \"BX:Z:\" | sort -k 1,1 | tr \"\\t\" \"\\n\" >" + tmp_filt_sort_wob1
 		subprocess.call(cmd1, shell=True)
@@ -179,7 +181,7 @@ def TENx2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bin
 		cmd6 = "cat " + tmp_filt_sort_wb2 + " " + tmp_filt_sort_wob2 + " > " + outfq2
 		subprocess.call(cmd5, shell=True)
 		subprocess.call(cmd6, shell=True)
-		logging("sorting reads by barcodes end.")
+		#logging("sorting reads by barcodes end.")
 	else:
 		subprocess.call(["mv", tmp_out1, outfq1])
 		subprocess.call(["mv", tmp_out2, outfq2])
@@ -201,6 +203,8 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		(outdir, filename2) = os.path.split(outfq2)
 	else:
 		outdir = os.getcwd()
+		filename1=outfq1
+		filename2=outfq2
 
 	#temp paths and files
 	bc_fq   = outdir + "/tmp"
@@ -216,21 +220,21 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 	bc2_sam = outdir + "/tmp_bc2.sam"
 	bc3_sam = outdir + "/tmp_bc3.sam"
 	
-	tmp_fq1_read = outdir + "/tmp_read1_only.fq"
+	tmp_fq2_read = outdir + "/tmp_read2_only.fq"
 	tmp_out1 = outdir + "/tmp_read1_out.fq"
 	tmp_out2 = outdir + "/tmp_read2_out.fq"
 	tmp_filt1 = outdir + "/tmp.read1.filt.fq"
 	tmp_filt2 = outdir + "/tmp.read2.filt.fq"
-	tmp_filt_sort_wb1  = outdir + "/" + filename1 + ".sort.wb.1.fq"
-	tmp_filt_sort_wob1 = outdir + "/" + filename1 + ".sort.wob.1.fq"
-	tmp_filt_sort_wb2  = outdir + "/" + filename2 + ".sort.wb.2.fq"
-	tmp_filt_sort_wob2 = outdir + "/" + filename2 + ".sort.wob.2.fq"
+	tmp_filt_sort_wb1  = outdir + "/" + filename1 + ".sort.wb.fq"
+	tmp_filt_sort_wob1 = outdir + "/" + filename1 + ".sort.wob.fq"
+	tmp_filt_sort_wb2  = outdir + "/" + filename2 + ".sort.wb.fq"
+	tmp_filt_sort_wob2 = outdir + "/" + filename2 + ".sort.wob.fq"
 	
-	reporthtml = outdir + "/FASTQ.QC.fastp.html"
-	reportjson = outdir + "/FASTQ.QC.fastp.json"
+	reporthtml = outdir + "/" + "FASTQ.QC.html"
+	reportjson = outdir + "/" + "FASTQ.QC.json"
 
 	#extract barcodes
-	logging("Extracting barcodes start.")
+	#logging("Extracting barcodes start.")
 	run_cmd(
 		[
 		"python",
@@ -239,10 +243,10 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		bc_fq],
 		"Extract_barcode"
 	)
-	logging("Extracting barcodes end.")
+	#logging("Extracting barcodes end.")
 
 	#align barcodes
-	logging("Aligning barcodes start.")
+	#logging("Aligning barcodes start.")
 	run_cmd(
 		["bwa",
 		"aln", 
@@ -314,10 +318,10 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		],
 		"samse_barcode3"
 	)
-	logging("Extracting barcodes end.")
+	#logging("Extracting barcodes end.")
 
 	#correct barcodes
-	logging("Correcting barcodes start.")
+	#logging("Correcting barcodes start.")
 	run_cmd(
 		[
 		python_path + "../src/correct_barcode_stlfr",
@@ -325,18 +329,18 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		bc1_sam,
 		bc2_sam,
 		bc3_sam,
-		tmp_fq1_read,
-		infq2,
+		infq1,
+		tmp_fq2_read,
 		str(2),
 		tmp_out1, 
 		tmp_out2,
 		],
 		"Correcting_barcodes"
 	)
-	logging("Correcting barcodes end.")
+	#logging("Correcting barcodes end.")
 
 	#Filt & sort barcodes
-	logging("fitering fastq start.")
+	#logging("fitering fastq start.")
 	if ((sort == "Yes") & (filt == "Yes")):
 		run_cmd(
 			[
@@ -345,9 +349,9 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 			"-I", tmp_out2, 
 			"-o", tmp_filt1, 
 			"-O", tmp_filt2, 
-			"-w", threads, 
+			"-w", "8", 
 			"-q", "20", 
-			"-u","50", 
+			"-u", "50", 
 			"-n", "10", 
 			"-l", "50",
 			"-h", reporthtml, 
@@ -374,7 +378,7 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		os.remove(tmp_out2)
 		os.remove(tmp_filt1)
 		os.remove(tmp_filt2)		
-		logging("sorting reads by barcodes end.")
+		#logging("sorting reads by barcodes end.")
 	elif (filt == "Yes"):
 		run_cmd(
 			[
@@ -383,9 +387,9 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 			"-I", tmp_out2, 
 			"-o", outfq1, 
 			"-O", outfq2, 
-			"-w", threads, 
+			"-w", "8", 
 			"-q", "20", 
-			"-u","50", 
+			"-u", "50", 
 			"-n", "10", 
 			"-l", "50",
 			"-h", reporthtml, 
@@ -418,7 +422,7 @@ def stLFR2ULRF(infq1, infq2, outfq1, outfq2, white_list, filt, sort, threads, bi
 		subprocess.call(["mv", tmp_out2, outfq2])
 	
 	#remove tmp files
-	os.remove(tmp_fq1_read)
+	os.remove(tmp_fq2_read)
 	os.remove(bc1_fq)
 	os.remove(bc2_fq)
 	os.remove(bc3_fq)
@@ -435,9 +439,12 @@ def TELLSeq2ULRF(infq1, infq2, idxfq, outfq1, outfq2, filt, sort, threads, bin):
 	# To convert raw TELL-Seq sequencing data to univfied linked read format. #
 	###########################################################################
 	if outfq1.startswith("/"):
-		(outdir, filename) = os.path.split(outfq1)
+		(outdir, filename1) = os.path.split(outfq1)
+		(outdir, filename2) = os.path.split(outfq2)
 	else:
 		outdir = os.getcwd()
+		filename1=outfq1
+		filename2=outfq2
 
 	#temp files
 	tmpbq   = outdir + "/tmp.barcode.txt"
@@ -447,12 +454,12 @@ def TELLSeq2ULRF(infq1, infq2, idxfq, outfq1, outfq2, filt, sort, threads, bin):
 	tmpfq2  = outdir + "/tmp.correct.2.fq"	
 	tmp_filt1 = outdir + "/tmp.read1.filt.fq"
 	tmp_filt2 = outdir + "/tmp.read2.filt.fq"
-	tmp_filt_sort_wb1  = outdir + "/" + filename + ".sort.wb.1.fq"
-	tmp_filt_sort_wob1 = outdir + "/" + filename + ".sort.wob.1.fq"
-	tmp_filt_sort_wb2  = outdir + "/" + filename + ".sort.wb.2.fq"
-	tmp_filt_sort_wob2 = outdir + "/" + filename + ".sort.wob.2.fq"
-	reporthtml = outdir + "/FASTQ.QC.fastp.html"
-	reportjson = outdir + "/FASTQ.QC.fastp.json"
+	tmp_filt_sort_wb1  = outdir + "/" + filename1 + ".sort.wb.fq"
+	tmp_filt_sort_wob1 = outdir + "/" + filename1 + ".sort.wob.fq"
+	tmp_filt_sort_wb2  = outdir + "/" + filename2 + ".sort.wb.fq"
+	tmp_filt_sort_wob2 = outdir + "/" + filename2 + ".sort.wob.fq"
+	reporthtml = outdir + "/" + "FASTQ.QC.html"
+	reportjson = outdir + "/" + "FASTQ.QC.json"
 
 	#Format conversion
 	run_cmd(
@@ -498,9 +505,9 @@ def TELLSeq2ULRF(infq1, infq2, idxfq, outfq1, outfq2, filt, sort, threads, bin):
 			"-I", tmpfq2, 
 			"-o", tmp_filt1, 
 			"-O", tmp_filt2, 
-			"-w", threads, 
+			"-w", "8", 
 			"-q", "20", 
-			"-u","50", 
+			"-u", "50", 
 			"-n", "10", 
 			"-l", "50",
 			"-h", reporthtml, 
@@ -509,10 +516,14 @@ def TELLSeq2ULRF(infq1, infq2, idxfq, outfq1, outfq2, filt, sort, threads, bin):
 			"filtering_reads"
 		)
 
-		cmd1 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt1 + " | grep \"BX:Z:\" | sort -k 2.1,2.25 -k 1,1 | tr \"\\t\" \"\\n\" > " + outfq1
-		cmd2 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt2 + " | grep \"BX:Z:\" | sort -k 2.1,2.25 -k 1,1 | tr \"\\t\" \"\\n\" > " + outfq2
+		cmd1 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt1 + " | grep \"BX:Z:\" | sort -k 2.1,2.25 -k 1,1 | tr \"\\t\" \"\\n\" > " + tmp_filt_sort_wb1
+		cmd2 = "awk \'{printf(\"%s%s\",$0,(NR%4==0)?\"\\n\":\"\\t\")}\' " + tmp_filt2 + " | grep \"BX:Z:\" | sort -k 2.1,2.25 -k 1,1 | tr \"\\t\" \"\\n\" > " + tmp_filt_sort_wb2
+		cmd3 = "ln -fs " + tmp_filt_sort_wb1 + " " + outfq1
+		cmd4 = "ln -fs " + tmp_filt_sort_wb2 + " " + outfq2
 		subprocess.call(cmd1, shell=True)
 		subprocess.call(cmd2, shell=True)
+		subprocess.call(cmd3, shell=True)
+		subprocess.call(cmd4, shell=True)
 
 		os.remove(tmpfq1)
 		os.remove(tmpfq2)
@@ -526,7 +537,7 @@ def TELLSeq2ULRF(infq1, infq2, idxfq, outfq1, outfq2, filt, sort, threads, bin):
 			"-I", tmpfq2, 
 			"-o", outfq1, 
 			"-O", outfq2, 
-			"-w", threads, 
+			"-w", "8", 
 			"-q", "20", 
 			"-u", "50", 
 			"-n", "10", 
@@ -563,6 +574,7 @@ def stLFR210x(infq1, infq2, outfq1, outfq2, bin):
 		(outdir, filename) = os.path.split(outfq1)
 	else:
 		outdir = os.getcwd()
+		filename = outfq1
 
 	#temp files
 	tmpbq  = outdir + "/barcode_freq.txt"
@@ -583,6 +595,7 @@ def TELLSeq210x(infq1, infq2, inxfq, outfq1, outfq2, white_list, bin):
 		(outdir, filename) = os.path.split(outfq1)
 	else:
 		outdir = os.getcwd()
+		filename = outfq1
 
 	#temp files
 	tmpfq1 = outdir + "/R1_sl.fastq.gz.4tenx.fastq"

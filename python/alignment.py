@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import shutil
 
 python_path = os.path.dirname(os.path.abspath( __file__ )) + "/"
 sys.path.append(python_path)
@@ -15,6 +16,7 @@ def align_10x(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir,filename)=os.path.split(outdir + "/" + outfile)
 	
 	#temp paths and files
 	tmp_ema_sam  = outdir + "/tmp.ema.sam"
@@ -26,9 +28,9 @@ def align_10x(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 	tmp_markdup_bam = outdir + "/tmp.markdup.bam"
 	tmp_markdup_mat = outdir + "/tmp.markdup.mat"
 
-	rg="@RG\\tID:example\\tSM:example"
-
 	#Align reads
+	cmd=python_path+"../src/EMA/ema"+" align "+" -1 "+ bq1 + " -2 "+ bq2 +" -r "+ ref + " -R "+ rg + " -p "+ " 10x "+" -t "+ threads + " | " + "samtools" + " view " + " -Sb " + " - " + " -o " + tmp_ema_bam
+	print(cmd)
 	pipe = subprocess.Popen(
 			[
 			python_path+"../src/EMA/ema", 
@@ -88,6 +90,7 @@ def align_10x(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 		[
 		"samtools",
 		"merge",
+		"-f",
 		tmp_merge_bam, 
 		tmp_bwa_bam, 
 		tmp_ema_bam
@@ -128,21 +131,29 @@ def align_10x(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 	)	
 
 	#QC
-	run_cmd(
-		[
-		python_path + "../src/long_fragment/construct_fragment",
-		"--bam", outfile,
-		"--output", outdir
-		],
-		"fragment_stat",
-	)
-	
+	print("fragment_construction starts:")
+	cmd = python_path + "../src/long_fragment/construct_fragment" + " -d " + str(200000) + " -t " +  str(threads) + " --bam " + outfile + " --output " + outdir + "/constructedfragment.xls" + " 1>" + outdir + "/constructedfragment.stat.xls"
+	print(cmd)
+	subprocess.call(cmd, shell=True)
+
+	#run_cmd(
+	#	[
+	#	python_path + "../src/long_fragment/construct_fragment",
+	#	"-d", 200000,
+	#	"-t", threads,
+	#	"--bam", outfile,
+	#	"--output", outdir + "/constructedfragment.xls"
+	#	],
+	#	"fragment_stat",
+	#)
+
+	samtools_path = shutil.which("samtools")
 	run_cmd(
 		[
 		"perl", python_path+"AlignStat_WGS.pl", 
 		"-in", outfile, 
 		"-sam", filename, 
-		"-samtools", "/home/comp/cschaoyang/SOFTWARE/ANACONDA3/V2019/bin/samtools", 
+		"-samtools", samtools_path, 
 		"-outdir", outdir, 
 		"-move", outdir
 		],
@@ -164,6 +175,7 @@ def align_stLFR(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir,filename)=os.path.split(outdir + "/" + outfile)
 
 	#temp paths and files
 	tmp_ema_sam  = outdir + "/tmp.ema.sam"
@@ -174,10 +186,10 @@ def align_stLFR(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 	tmp_sort_bam  = outdir + "/tmp.sort.bam"
 	tmp_markdup_bam = outdir + "/tmp.markdup.bam"
 	tmp_markdup_mat = outdir + "/tmp.markdup.mat"
-
-	rg="@RG\\tID:example\\tSM:example"
 	
 	#Align reads
+	cmd=python_path+"../src/EMA/ema"+" align "+" -1 "+ bq1 + " -2 "+ bq2 +" -r "+ ref + " -R "+ rg + " -p "+ " stlfr "+" -t "+ threads + " | " + "samtools" + " view " + " -Sb " + " - " + " -o " + tmp_ema_bam
+	print(cmd)
 	pipe = subprocess.Popen(
 		[
 		python_path+"../src/EMA/ema",
@@ -186,7 +198,7 @@ def align_stLFR(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 		"-2", bq2,
 		"-r", ref, 
 		"-R", rg,
-		"-p", "stLFR",
+		"-p", "stlfr",
 		"-t", threads,
 		],
 		stdout=subprocess.PIPE,
@@ -279,21 +291,25 @@ def align_stLFR(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 	)
 	
 	#QC
-	run_cmd(
-		[
-		python_path + "../src/long_fragment/construct_fragment",
-		"--bam", outfile,
-		"--output", outdir,
-		],
-		"fragment_stat",
-	)
+	cmd = python_path + "../src/long_fragment/construct_fragment" + " -d " + str(200000) + " -t " +  str(threads) + " --bam " + outfile + " --output " + outdir + "/constructedfragment.xls" + " 1>" + outdir + "/constructedfragment.stat.xls"
+	subprocess.call(cmd, shell=True)
+
+	#run_cmd(
+	#	[
+	#	python_path + "../src/long_fragment/construct_fragment",
+	#	"--bam", outfile,
+	#	"--output", outdir,
+	#	],
+	#	"fragment_stat",
+	#)
 	
+	samtools_path = shutil.which("samtools")
 	run_cmd(
 		[
 		"perl", python_path+"AlignStat_WGS.pl",
 		"-in", outfile,
 		"-sam", filename,
-		"-samtools","/home/comp/cschaoyang/SOFTWARE/ANACONDA3/V2019/bin/samtools",
+		"-samtools",samtools_path,
 		"-outdir", outdir, 
 		"-move", outdir,
 		],
@@ -301,7 +317,6 @@ def align_stLFR(bq1, bq2, fq1, fq2, rg, ref, outfile, sort, mark, threads, bin):
 	)
 
 	#remove tmp files
-	os.remove(tmp_ema_sam)
 	os.remove(tmp_bwa_bam)
 	os.remove(tmp_ema_bam)
 	os.remove(tmp_merge_bam)
@@ -316,6 +331,7 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 		(outdir, filename) = os.path.split(outfile)
 	else:
 		outdir = os.getcwd()
+		(outdir,filename)=os.path.split(outdir + "/" + outfile)
 
 	#temp paths and files
 	tmp_ema_sam  = outdir + "/tmp.ema.sam"
@@ -323,9 +339,10 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 	tmp_sort_bam  = outdir + "/tmp.sort.bam"
 	tmp_markdup_bam = outdir + "/tmp.markdup.bam"
 	tmp_markdup_mat = outdir + "/tmp.markdup.mat"
-	rg="@RG\\tID:example\\tSM:example"
 
 	#Align reads
+	cmd=python_path+"../src/EMA/ema"+" align "+" -1 "+ bq1 + " -2 "+ bq2 +" -r "+ ref + " -R "+ rg + " -p "+ " tellseq "+" -t "+ threads + " | " + "samtools" + " view " + " -Sb " + " - " + " -o " + tmp_ema_bam
+	print(cmd)
 	pipe = subprocess.Popen(
 			[
 			python_path+"../src/EMA/ema",
@@ -334,7 +351,7 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 			"-2", bq2,
 			"-r", ref,
 			"-R", rg,
-			"-p", "TELLSeq",
+			"-p", "tellseq",
 			"-t", threads
 			],
 			stdout=subprocess.PIPE,
@@ -356,23 +373,13 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 	pipe.communicate()
 	
 	#Bam Post Processing
-	run_cmd(
-		[
-		"samtools",
-		"merge",
-		tmp_merge_bam,
-		tmp_bwa_bam,
-		tmp_ema_bam
-		],
-		"merge_bam",
-	)
 
 	run_cmd(
 		[
 		"samtools",
 		"sort",
 		"--threads", threads,
-		tmp_merge_bam,
+		tmp_ema_bam,
 		"-o", tmp_sort_bam
 		],
 		"sort_bam"
@@ -400,21 +407,25 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 	)
 
 	#QC
-	run_cmd(
-		[
-		python_path + "../src/long_fragment/construct_fragment",
-		"--bam", outfile,
-		"--output", outdir,
-		],
-		"fragment_stat",
-	)
+	cmd = python_path + "../src/long_fragment/construct_fragment" + " -d " + str(200000) + " -t " +  str(threads) + " --bam " + outfile + " --output " + outdir + "/constructedfragment.xls" + " 1>" + outdir + "/constructedfragment.stat.xls"
+	subprocess.call(cmd, shell=True)
+
+	#run_cmd(
+	#	[
+	#	python_path + "../src/long_fragment/construct_fragment",
+	#	"--bam", outfile,
+	#	"--output", outdir,
+	#	],
+	#	"fragment_stat",
+	#)
 	
+	samtools_path=shutil.which("samtools")
 	run_cmd(
 		[
 		"perl", python_path+"AlignStat_WGS.pl",
 		"-in", outfile,
 		"-sam", filename,
-		"-samtools","/home/comp/cschaoyang/SOFTWARE/ANACONDA3/V2019/bin/samtools",  
+		"-samtools",samtools_path,  
 		"-outdir", outdir,
 		"-move", outdir
 		],
@@ -422,7 +433,6 @@ def align_TELLSeq(bq1, bq2, rg, ref, outfile, sort, mark, threads, bin):
 	)
 
 	#remove tmp files
-	os.remove(tmp_ema_sam)
 	os.remove(tmp_ema_bam)
 	os.remove(tmp_sort_bam)
 
