@@ -18,8 +18,7 @@ def checkFQ(args):
 	# create output dir
 	dirname, filename = os.path.split(os.path.abspath(args.output_fastq1))
 	if(os.path.exists(dirname)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is:" + dirname)
 	else:
 		os.makedirs(dirname)
 
@@ -41,11 +40,12 @@ def checkBAM(args):
 	# create output dir
 	dirname, filename = os.path.split(os.path.abspath(args.outfile))
 	if(os.path.exists(dirname)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is: " + dirname)
 	else:
 		os.makedirs(dirname)
 
+	#tmp
+	print(args.read_group)
 	# start the alignment
 	pipeline.moduleBAM(args)
 
@@ -64,8 +64,7 @@ def checkSNV(args):
 	# create output dir
 	dirname, filename = os.path.split(os.path.abspath(args.outfile))
 	if(os.path.exists(dirname)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is: " + dirname)
 	else:
 		os.makedirs(dirname)
 	
@@ -101,8 +100,7 @@ def checkSV(args):
         # create output directory
 	dirname, filename = os.path.split(os.path.abspath(args.outfile))
 	if(os.path.exists(dirname)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is:" + dirname)
 	else:
 		os.makedirs(dirname)
 
@@ -129,8 +127,7 @@ def checkPHASE(args):
 	# check the output directory
 	dirname, filename = os.path.split(os.path.abspath(args.outfile))
 	if(os.path.exists(dirname)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is:" + dirname)
 	else:
 		os.makedirs(dirname)
 		
@@ -139,17 +136,18 @@ def checkPHASE(args):
 	
 
 def checkMKFQ(args):
-	
 	# start simulating reads
 	pipeline.moduleMKFQ(args)
 
-def checkDOWNLOAD(args):
-	print("XXX")
+
+def check_environment(args):
+	# check the dependency
+	pipeline.moduleENV(args)
 
 def checkWGS(args):	
 	# check the input sample information
-	if (not os.path.exists(args.bam)):
-		print("Error: The vcf file is unaccessible. Please check.")
+	if (not os.path.exists(args.sample_info)):
+		print("Error: The sample information file is unaccessible. Please check.")
 		sys.exit(1)
 	
 	# check the database
@@ -175,8 +173,7 @@ def checkWGS(args):
 
 	# create output directory
 	if(os.path.exists(args.outdir)):
-		print("Error: The output directory is already existing.")
-		sys.exit(1)
+		print("The output directory is:" + args.outdir)
 	else:
 		os.makedirs(args.outdir)
 
@@ -190,12 +187,10 @@ def main():
 	parser.set_defaults(abs=dirname)
 	subparsers = parser.add_subparsers()
 	
-   	# DOWNLOAD section
-	download = subparsers.add_parser("DOWNLOAD", 
-		       help="To download the databases")
-	download.add_argument('-o','--output_path',required=False, 
-		       help='Output Directory to store database')
-	download.set_defaults(func=checkDOWNLOAD)
+	# checkENV section
+	checkENV = subparsers.add_parser("checkENV",
+			help="To check the environment")
+	checkENV.set_defaults(func=check_environment)
 
 	# MKFQ section
 	mkfq = subparsers.add_parser("MKFQ", 
@@ -279,8 +274,8 @@ def main():
 	sv = subparsers.add_parser("SV", help="To call large structural variants")
 	sv.add_argument('-B', '--bam', required=True,
 			help='The aligned bam file for variation calling')
-	sv.add_argument('-V', '--vcf', required=True,
-			help='The detected variants to phase')
+	sv.add_argument('-V', '--vcf', required=False,
+			help='The precalled variants required by Aquila')
 	sv.add_argument('-R', '--reference', required=True,
 			help='The reference sequence')
 	sv.add_argument('-A', '--application', default='Aquila', choices=['Aquila', 'LinkedSV', 'VALOR'],
@@ -321,6 +316,8 @@ def main():
 			help='The output directory')
 	wgs.add_argument('-DB','--database',required=True,
 			help='The reference sequence to align')
+	wgs.add_argument('-RG','--read_group',default='@RG\tID:example\tSM:example',
+			help='The read group')
 	wgs.add_argument('-T', '--threads', default=1,
 			help='Number of threads')
 	

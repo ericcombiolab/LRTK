@@ -7,7 +7,7 @@
 ## bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
 ```
-conda install lrtk (waiting)
+conda install lrtk
 LRTK -h
 ```
 ## dependencies
