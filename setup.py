@@ -20,7 +20,7 @@ setup(
     author_email='yangchaogab@gmail.com',
     packages=['lrtk'],
     install_requires=['pysam','pandas','bwa','picard','samtools','freebayes','hapcut2', 'aquila', 'vcflib'],
-    entry_points={'console_scripts':['entry=packagename.scriptname:function',],
+    entry_points={'console_scripts':['entry=packagename.scriptname:function']},
     license='MIT',
     zip_safe=False
 )
