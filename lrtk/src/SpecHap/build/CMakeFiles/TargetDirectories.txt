@@ -1,0 +1,8 @@
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/install/strip.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/install/local.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/BarcodeExtract.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/rebuild_cache.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/SpecHap.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/list_install_components.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/edit_cache.dir
+/tmp/local/cschaoyang/SOFTWARE/SpecHap/PACKAGE/SpecHap/build/CMakeFiles/install.dir
