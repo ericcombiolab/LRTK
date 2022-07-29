@@ -1,0 +1,34 @@
+# path of template fasta file
+Path_Fastahap1=./resource/hap1.fa
+Path_Fastahap2=./resource/hap2.fa
+# number of processors for parallele
+processors=50
+# coverage for long fragment
+CF=100
+# coverage for short reads
+CR=0.1
+# the average number of molecules for each droplet
+N_FP=16
+# the average length for long fragment (Kb)
+Mu_F=20
+# length of short reads (bp)
+SR=100
+# fast mode ('Y' or 'N'; only simulate uniform sequencing quality)
+Fast_mode=N
+# simulate sequencing error ('Y') or not ('N')
+Seq_error=Y
+# sequencing error rate
+Error_rate=0.01
+#path to sequencing error profile
+Path_Seq_qual=./resource/error_profile_reads.txt
+#path to barcode error profile
+Path_Barcode_qual=./resource/error_profile_barcode_42.txt
+# mean of insert size for short reads (bp)
+Mu_IS=400
+# standard deviation of insert size for short reads (bp)
+Std_IS=10
+# barcode list
+Path_barcodepool=./resource/barcodelist.txt
+# Haploid (Hap=1) or Diploid (Hap=2)
+Hap=2
+Barcode_Length=42
