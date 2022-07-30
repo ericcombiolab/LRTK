@@ -82,4 +82,6 @@ LRTK WGS -SI path_to_sample_info -OD path_to_outdir -DB path_to_database -RG "@R
 # Output files:
 
 # Troubleshooting
-Please submit issues on the github page for LRTK.
+If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
+(Chao Yang, email: cschaoyang@comp.hkbu.edu.hk)
+(Lu Zhang, email: ericluzhang@hkbu.edu.hk)
