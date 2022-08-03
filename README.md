@@ -7,11 +7,11 @@
 ## bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
 ```
-conda install lrtk
-LRTK -h
+conda install -c bioconda lrtk
+lrtk -h
 ```
 ## dependencies
-LRTK utilizes python3 to execute the programs and requires some python packages, including numpy, pysam, scipy and sortedcontainers. some commonly used bioinformatics tools, such as SAMtools and minimap2, should be included in the path environment variable. Or you could directly install them through binconda.
+LRTK is mainly implemented by python3 and requires python packages, such as numpy, pysam, scipy and sortedcontainers. The dependent tools will be installed automatically, including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin, 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth, 2012), HapCUT2 (Edge et al., 2017) and SAMtools (Li et al., 2009). 
 ```
 conda install -c bioconda aquila
 conda install -c bioconda bcftools
@@ -21,10 +21,10 @@ conda install -c bioconda freebayes
 conda install -c bioconda hapcut2
 conda install -c bioconda samtools
 ```
-Some optional tools, such as LinkedSV, Valor and SpecHap, need to be installed from source codes and added into the PATH environment variable.
+Furthermore, LinkedSV (Fang et al., 2019), SpecHap (Yu et al., 2021) and VALOR2 (Karaoǧlanoǧlu et al., 2020) needed to be installed by the users because they are not supported by conda. 
 
 ## example data in Zenodo
-Please download the default database from Zenodo (https://zenodo.org/record/6792169).
+The default database can be downloaded from Zenodo (https://zenodo.org/record/6792169).
 The database directory should be organized as:
 ```
 database
