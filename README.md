@@ -128,7 +128,6 @@ Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Ex
 Example_stLFR	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R2.fq	-	stLFR
 Example_TELLSeq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R2.fq /tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.index.fq TELLSeq
 ```
-# Output files:
 
 # Troubleshooting
 If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
