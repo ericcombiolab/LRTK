@@ -61,6 +61,7 @@ To simplify the following description, we will define some commonly used variabl
 LRTK=path_to_lrtk
 curP=path_to_working directory
 DATABASE=path_to_default database
+OUDIR=${curP}"/WGS/"
 
 ###input files
 raw10xFQ1=${curP}"/FQs/Example.10x.R1.fq"
@@ -70,6 +71,13 @@ rawstLFRFQ2=${curP}"/FQs/Example.stLFR.R2.fq"
 rawTELLSeqFQ1=${curP}"/FQs/Example.TELLSeq.R1.fq"
 rawTELLSeqFQ2=${curP}"/FQs/Example.TELLSeq.R2.fq"
 rawTELLSeqFQi=${curP}"/FQs/Example.TELLSeq.index.fq"
+
+barcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wb.fq"
+barcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wb.fq"
+nobarcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wob.fq"
+nobarcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wob.fq"
+
+Sinfo=${curP}"/sample.info"
 
 #output files
 outFQ1=${curP}"/test/Example.R1.fq"
@@ -91,27 +99,27 @@ UNIQNESS=${DATABASE}"/Uniqness_map/"
 
 ## function 1: format conversion across diverse linked-read data formats
 ```
-LRTK FQCONVER -I1 NA12878_1.fastq -I2 NA12878_2.fastq -IT stLFR -O1 outFQ1 -O2 outFQ2 -OT ULRF -B BLstLFR -T 4 
+LRTK FQCONVER -I1 raw10xFQ1 -I2 raw10xFQ2 -IT 10x -O1 outFQ1 -O2 outFQ2 -OT ULRF -B BL10x -T 4 
 ```
 ## function 2: unified barcode-aware alignment
 ```
-LRTK ALIGN -BQ1 barcodedstLFRFQ1 -BQ2 barcodedstLFRFQ2 -FQ1 nobarcodedstLFRFQ1 -FQ2 nobarcodedstLFRFQ2 -R GRCH38.fa -O NA12878.bam -RG "@RG\tID:NA12878\tSM:NA12878" -P stLFR -T 4
+LRTK ALIGN -BQ1 barcoded10xFQ1 -BQ2 barcoded10xFQ2 -FQ1 nobarcoded10xFQ1 -FQ2 nobarcoded10xFQ2 -R GRCH38 -O outBAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
 ## function 3: small variation calling
 ```
-LRTK SNV -B NA12878.bam -R GRCH38 -A "SAMTOOLS" -T 4 -O NA12878.SNV.vcf
+LRTK SNV -B outBAM -R GRCH38 -A "SAMTOOLS" -T 4 -O outVCF1
 ```
 ## function 4: large variation calling
 ```
-LRTK SV -B NA12878.bam -R GRCH38 -A "Aquila" -T 4 -O NA12878.SV.vcf -V NA12878.SNV.raw.vcf -U path_to_UNIQNESS_database
+LRTK SV -B outBAM -R GRCH38 -A "Aquila" -T 4 -O outVCF2 -V outVCF1 -U UNIQNESS
 ```
 ## function 5: variation phasing
 ```
-LRTK PHASE -B NA12878.bam -R GRCH38 -A "HapCUT2" -T 12 -V NA12878.SNV.vcf -O NA12878.SNV.phased.vcf
+LRTK PHASE -B outBAM -R GRCH38 -A "HapCUT2" -T 4 -V outVCF1 -O outVCF3
 ```
 ## function 6: automatic pipeline to process multiple samples
 ```
-LRTK WGS -SI path_to_sample_info -OD path_to_outdir -DB path_to_database -RG "@RG\tID:NA12878\tSM:NA12878" -T 32
+LRTK WGS -SI Sinfo -OD OUDIR -DB DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
 # Output files:
 
