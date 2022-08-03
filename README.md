@@ -24,7 +24,7 @@ conda install -c bioconda samtools
 Some optional tools, such as LinkedSV, Valor and SpecHap, need to be installed from source codes and added into the PATH environment variable.
 
 ## example data in Zenodo
-Please download the default database from Zenodo.
+Please download the default database from Zenodo (https://zenodo.org/record/6792169).
 The database directory should be organized as:
 ```
 database
