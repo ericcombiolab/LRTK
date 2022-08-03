@@ -55,6 +55,39 @@ example
 ```
 
 # Running examples
+To simplify the following description, we will define some commonly used variables here.
+```
+LRTK=path_to_lrtk
+curP=path_to_working directory
+DATABASE=path_to_default database
+
+###input files
+raw10xFQ1=${curP}"/FQs/Example.10x.R1.fq"
+raw10xFQ2=${curP}"/FQs/Example.10x.R2.fq"
+rawstLFRFQ1=${curP}"/FQs/Example.stLFR.R1.fq"
+rawstLFRFQ2=${curP}"/FQs/Example.stLFR.R2.fq"
+rawTELLSeqFQ1=${curP}"/FQs/Example.TELLSeq.R1.fq"
+rawTELLSeqFQ2=${curP}"/FQs/Example.TELLSeq.R2.fq"
+rawTELLSeqFQi=${curP}"/FQs/Example.TELLSeq.index.fq"
+
+#output files
+outFQ1=${curP}"/test/Example.R1.fq"
+outFQ2=${curP}"/test/Example.R2.fq"
+outBAM=${curP}"/test/Example.bam"
+outVCF1=${curP}"/test/Example.small.variants.vcf"
+outVCF2=${curP}"/test/Example.large.variants.vcf"
+outVCF3=${curP}"/test/Example.small.variants.phased.vcf"
+
+###database
+BL10x=${DATABASE}"/WhiteList/white_list_10x_barcode.fa"
+BLstLFR=${DATABASE}"/WhiteList/white_list_stlfr_barcode.fa"
+BLTELLSeq=${DATABASE}"/WhiteList/4M-with-alts-february-2016.TELLSeq.txt"
+GRCH38=${DATABASE}"/GRCH38/genome.fa"
+SONIC=${DATABASE}"/sonic/GRCh38.sonic"
+UNIQNESS=${DATABASE}"/Uniqness_map/"
+
+```
+
 ## function 1: format conversion across diverse linked-read data formats
 ```
 LRTK FQCONVER -I1 NA12878_1.fastq -I2 NA12878_2.fastq -IT stLFR -O1 outFQ1 -O2 outFQ2 -OT ULRF -B BLstLFR -T 4 
