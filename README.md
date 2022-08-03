@@ -121,6 +121,10 @@ LRTK PHASE -B outBAM -R GRCH38 -A "HapCUT2" -T 4 -V outVCF1 -O outVCF3
 ```
 LRTK WGS -SI Sinfo -OD OUDIR -DB DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
+The sample information file should be organized as:
+```
+
+```
 # Output files:
 
 # Troubleshooting
