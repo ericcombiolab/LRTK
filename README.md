@@ -57,6 +57,7 @@ example
 # Running examples
 To simplify the following description, we will define some commonly used variables here.
 ```
+###working environment
 LRTK=path_to_lrtk
 curP=path_to_working directory
 DATABASE=path_to_default database
