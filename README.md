@@ -1,4 +1,4 @@
-# LRTK: a unified ToolKit for Linked-Read sequencing data
+# LRTK: A unified and versatile toolkit for ana-lyzing linked-read sequencing data
 # Overview
  LRTK is an easy-to-use tool kit to handle different linked-read sequencing data. It consist of multiple sections: format conversion of FASTQ files, barcode-aware read alignment, quality control and downstream analysis modules (SNP/INDEL/SV calling and phasing). It can accept multiple linked-read format, including sequencing data from 10x genomics, stLFR, and TELL-Seq technologies. 
  
