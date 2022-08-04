@@ -55,7 +55,7 @@ example
 ```
 
 # Running examples
-To simplify the following description, we will define some commonly used variables here.
+To simplify the following description, we will firstly define some commonly used variables here.
 ```
 ###working environment
 LRTK=path_to_lrtk
