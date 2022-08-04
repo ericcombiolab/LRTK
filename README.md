@@ -33,7 +33,7 @@ database
 |-WhiteList
 |-Uniqness_map
 ```
-In addition, we provide multiple example linked-read sequencing data to run LRTK. We have included the small data sets (FQs) in github and stored the large data sets on Zenodo to generate the HTML report. 
+In addition, we provide multiple example linked-read sequencing data to run LRTK. We have included the small data sets (FQs) in github and stored the large data sets on Zenodo  (https://zenodo.org/record/6792169) to generate the HTML report. 
 ```
 example
 |-FQs/
