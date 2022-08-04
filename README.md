@@ -135,17 +135,22 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 ```
 $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
-*Required parameters
+*parameters
 --bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+
 --reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
---application: The SNV/INDEL callers. Users can choose from (FreeBayes, Samtools, GATK).
+
+--application: The SNV/INDEL caller. Users can choose from (FreeBayes, Samtools, GATK).
+
 --threads: default = 1, this determines the number of threads used for SNV/INDEL caller. 
+
 --outfile: The final VCF file to write.
 
 ### function 4: example for large variation calling
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
 ```
+
 ### function 5: example for variation phasing
 ```
 $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
