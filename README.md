@@ -56,7 +56,7 @@ example
 
 # Running examples
 ## The Wrapper
-The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on the command and the helo information will be printed. 
+The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on the command and the help information will be printed. 
 ```
 lrtk -h 
 ```
@@ -81,7 +81,7 @@ optional arguments:
   -h, --help            show this help message and exit
 
 ```
-To simplify the following descriptions , we will firstly define some commonly used variables here.
+To simplify the following descriptions in running examples, we will firstly define some commonly used variables here.
 ```
 ###working environment
 LRTK=path_to_lrtk
