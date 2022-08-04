@@ -56,6 +56,7 @@ example
 
 # Running examples
 ## The Wrapper
+The simplest way to run METAMVGL is the wrapper, that runs initial binning (MetaBat2 or MaxBin2), paired-end graph extraction, and METAMVGL in one command:
 ```
 lrtk -h 
 usage: LRTK version 1.3
