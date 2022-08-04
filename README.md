@@ -122,7 +122,17 @@ SONIC=${DATABASE}"/sonic/GRCh38.sonic"
 UNIQNESS=${DATABASE}"/Uniqness_map/"
 ```
 ## Commands for raw read and variant analysis
-### function 1: example for format conversion across diverse linked-read data formats
+
+### function 1: example for linked-read simulator
+```
+$LRTK MKFQ -CF ${curP}"/FQs/simulation/diploid_config" -IT 10x
+```
+*parameters:
+-CF/--config_file: The path to config_files about simulation
+
+-IT/--input_type: Input sequencing technology. Users can choose from (10x,stLFR).
+
+### function 2: example for format conversion across diverse linked-read data formats
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
 ```
@@ -150,7 +160,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 
 -T/--threads: default = 1, this determines the number of threads used for bwa and samtools.
 
-### function 2: example for unified barcode-aware alignment
+### function 3: example for unified barcode-aware alignment
 ```
 $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
@@ -178,7 +188,7 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 
 -T/--threads: default = 1, this determines the number of threads used for ema, bwa and samtools.
 
-### function 3: example for small variation calling
+### function 4: example for small variation calling
 ```
 $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
@@ -194,7 +204,7 @@ $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 
 -O/--outfile: The final VCF file to write.
 
-### function 4: example for large variation calling
+### function 5: example for large variation calling
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
 ```
@@ -217,7 +227,7 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 -V/--vcf: The recommended "Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
 
 
-### function 5: example for variation phasing
+### function 6: example for variation phasing
 ```
 $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ```
@@ -237,7 +247,7 @@ $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 
 ## Commands for automatic pipeline
 LRTK provides an easy-to-use automatic pipeline to handle the linked-read sequencing data from single or multiple samples. The user may only prepare the linked-read sequencing ﬁles (FASTQ format) and adequate computational resources, LRTK will run the whole pipeline and generate the final report. 
-### function 6：example for single sample analysis
+### function 7：example for single sample analysis
 We show a simple example to process a single samples using the automatic pipeline. 
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
@@ -247,7 +257,7 @@ The sample information file should be organized as:
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
 Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
 ```
-### function 7: example for multiple samples analysis
+### function 8: example for multiple samples analysis
 We show a simple example to process multiple samples using the automatic pipeline, simultaneously. 
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
@@ -255,7 +265,7 @@ $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example"
 The sample information file should be organized as:
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
-Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
+Example_10x	path_to/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
 Example_stLFR	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R2.fq	-	stLFR
 Example_TELLSeq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R2.fq /tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.index.fq TELLSeq
 ```
