@@ -61,7 +61,7 @@ To simplify the following description, we will define some commonly used variabl
 LRTK=path_to_lrtk
 curP=path_to_working directory
 DATABASE=path_to_default database
-OUDIR=${curP}"/WGS/"
+OUTDIR=${curP}"/WGS/"
 
 ###input files
 raw10xFQ1=${curP}"/FQs/Example.10x.R1.fq"
