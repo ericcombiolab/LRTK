@@ -95,29 +95,29 @@ GRCH38=${DATABASE}"/GRCH38/genome.fa"
 SONIC=${DATABASE}"/sonic/GRCh38.sonic"
 UNIQNESS=${DATABASE}"/Uniqness_map/"
 
+## Commands for raw read and variant analysis
 ```
-
-## function 1: format conversion across diverse linked-read data formats
+### function 1: format conversion across diverse linked-read data formats
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
 ```
-## function 2: unified barcode-aware alignment
+### function 2: unified barcode-aware alignment
 ```
 $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
-## function 3: small variation calling
+### function 3: small variation calling
 ```
 $LRTK SNV -B $outBAM -R $GRCH38 -A "SAMTOOLS" -T 4 -O $outVCF1
 ```
-## function 4: large variation calling
+### function 4: large variation calling
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
 ```
-## function 5: variation phasing
+### function 5: variation phasing
 ```
 $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ```
-## function 6: automatic pipeline to process multiple samples
+### function 6: automatic pipeline to process multiple samples
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
