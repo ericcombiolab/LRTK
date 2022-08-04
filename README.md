@@ -298,7 +298,8 @@ Example_TELLSeq	/path_to/Example.TellSeq.R1.fq	/path_to/Example.TellSeq.R2.fq /p
 ```
 # examples of report: 
 lrtk creates reports in the HTML format .
-demo report(http://www.cnblogs.com/sxdcgaq8080/p/7894828.html)
+
+demo report(https://github.com/ericcombiolab/LRTK/blob/main/demo_report/LRTK.report.html)
 
 # Troubleshooting
 If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
