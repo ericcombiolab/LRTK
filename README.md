@@ -18,8 +18,13 @@ conda install -c bioconda bcftools
 conda install -c bioconda bwa
 conda install -c bioconda fastp
 conda install -c bioconda freebayes
+conda install -c bioconda gatk3
 conda install -c bioconda hapcut2
+conda install -c bioconda parallel
+conda install -c bioconda picard
 conda install -c bioconda samtools
+conda install -c bioconda whatshap
+conda install -c bioconda vcflib
 ```
 Furthermore, LinkedSV (Fang et al., 2019), SpecHap (Yu et al., 2021) and VALOR2 (Karaoǧlanoǧlu et al., 2020) needed to be installed by the users because they are not supported by conda. 
 
@@ -166,25 +171,25 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 ```
 *parameters:
 
--BQ1/--input_barcoded_fastq1: The first input file for barcoded paired FQs
+-BQ1/--input_barcoded_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data (with barcode).
 
--BQ2/--input_barcoded_fastq2: The second input file for bararcoded paired FQs
+-BQ2/--input_barcoded_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data (with barcode).
 
--FQ1/--input_fastq1:  The first input file for no Barcoded paired FQs
+-FQ1/--input_fastq1:  Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data (without barcode).
 
--FQ2/--input_fastq2:  The first input file for no Barcoded paired FQs
+-FQ2/--input_fastq2:  Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data (without barcode).
 
--RG/--read_group:  The read group string
+-RG/--read_group:  Full read group string (e.g. '@RG\tID:foo\tSM:bar')
 
 -R/--reference:  The reference sequence to align
 
--O/--outfile:  The output bamfile
+-O/--outfile:  The output alignment file.  
 
--S/--sort: To sort bam file by barcode
+-S/--sort: Users can choose from (Yes, No). "Yes" indicates that LRTK will use samtools to sort alignment files based on genomic coordinate.
 
--M/--mark_duplication: To mark the duplicated reads by barcode
+-M/--mark_duplication: Users can choose from (Yes, No). "Yes" indicates that LRTK will use picard to mark the duplicated reads using barcode information.
 
--P/--platform: {10x,stLFR,TELLSeq} linked-reads technology
+-P/--platform: Input sequencing technology. Users can choose from (10x,stLFR,TELLSeq).
 
 -T/--threads: default = 1, this determines the number of threads used for ema, bwa and samtools.
 
