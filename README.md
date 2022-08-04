@@ -106,7 +106,7 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 ```
 ### function 3: example for small variation calling
 ```
-$LRTK SNV -B $outBAM -R $GRCH38 -A "SAMTOOLS" -T 4 -O $outVCF1
+$LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
 ### function 4: example for large variation calling
 ```
