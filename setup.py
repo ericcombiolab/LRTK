@@ -19,7 +19,7 @@ setup(
     author='YANG CHAO',
     author_email='yangchaogab@gmail.com',
     packages=find_packages(),
-    install_requires=['pysam','pandas','bwa','picard','samtools','freebayes','hapcut2', 'aquila', 'vcflib'],
+    install_requires=['numpy','pysam','scipy','sortedcontainers','aquila','bcftools','bwa','fastp','freebayes','gatk3','hapcut2','parallel','picard','samtools','whatshap','vcflib'],
     package_data={'script' : ['*pl',
                             '*cpp',
                             '*stlfr',
