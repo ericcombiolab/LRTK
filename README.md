@@ -126,7 +126,9 @@ UNIQNESS=${DATABASE}"/Uniqness_map/"
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
 ```
--I1/--input_fastq1 INPUT_FASTQ1
+*parameters:
+
+  -I1/--input_fastq1 INPUT_FASTQ1
                         The first file for paired FQs
   -I2 INPUT_FASTQ2, --input_fastq2 INPUT_FASTQ2
                         The second file for paired FQs
@@ -153,6 +155,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
 *parameters:
+
 -BQ1/--input_barcoded_fastq1: The first input file for barcoded paired FQs
 
 -BQ2/--input_barcoded_fastq2: The second input file for bararcoded paired FQs
