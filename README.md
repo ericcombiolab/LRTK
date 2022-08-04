@@ -139,7 +139,7 @@ $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 
 --bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
 
---reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
 
 --application: The SNV/INDEL caller. Users can choose from (FreeBayes, Samtools, GATK).
 
@@ -155,7 +155,7 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 
 -B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
 
--R/--reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+-R/--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
 
 -A/--application: The SV caller. Users can choose from (Aquila, LinkedSV, VALOR).
 
@@ -163,17 +163,31 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 
 -O/--outfile: The final VCF file to write.
 
--U/--uniqness:  The recommanded "Uniqness_map/" is required database for Aquila. It can be downloaded from Zenodo.
+-U/--uniqness:  The recommended "Uniqness_map/" is required database for Aquila. It can be downloaded from Zenodo.
 
--S/--sonic: The recommanded "sonic/" is required database for VALOR. It can be downloaded from Zenodo.
+-S/--sonic: The recommended "sonic/" is required database for VALOR. It can be downloaded from Zenodo.
 
--V/--vcf: The recommanded "path_to_test/Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
+-V/--vcf: The recommended "Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
 
 
 ### function 5: example for variation phasing
 ```
 $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ```
+*parameters
+
+-B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+
+-R/--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+
+-A/--application: The variant phasing tool. Users can choose from (HapCUT2, WhatsHap, SpecHap).
+
+-T/--threads: default = 1, this determines the number of threads used for variant phasing tool. 
+
+-O/--outfile: The final phased VCF file to write.
+
+-V/--vcf: The recommended "Example.small.variants.vcf" is the input variants to phase.
+
 ## Commands for automatic pipeline
 LRTK provides an easy-to-use automatic pipeline to handle the linked-read sequencing data from single or multiple samples. The user may only prepare the linked-read sequencing ﬁles (FASTQ format) and adequate computational resources, LRTK will run the whole pipeline and generate the final report. 
 ### function 6：example for single sample analysis
