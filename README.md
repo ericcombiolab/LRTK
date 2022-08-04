@@ -297,7 +297,8 @@ Example_stLFR	/path_to/Example.stLFR.R1.fq	/path_to/Example.stLFR.R2.fq	-	stLFR
 Example_TELLSeq	/path_to/Example.TellSeq.R1.fq	/path_to/Example.TellSeq.R2.fq /path_to/Example.TellSeq.index.fq TELLSeq
 ```
 # examples of report: 
-lrtk creates reports in the HTML format.
+lrtk creates reports in the HTML format .
+demo report(http://www.cnblogs.com/sxdcgaq8080/p/7894828.html)
 
 # Troubleshooting
 If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
