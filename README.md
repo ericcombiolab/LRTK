@@ -128,27 +128,27 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 ```
 *parameters:
 
--I1/--input_fastq1: The first file for paired FQs
+-I1/--input_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data.
 
--I2/--input_fastq2: The second file for paired FQs
+-I2/--input_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data.
 
--ID/--index_fastq: The index file for paired linked-read sequencing FQs
+-ID/--index_fastq: Input index file (uncompressed FASTQ format) for paired linked-read sequencing data.
 
--IT/--input_type: {10x,stLFR,TELLSeq} The sequencing type for input FQs
+-IT/--input_type: Input sequencing technology. Users can choose from (10x,stLFR,TELLSeq).
 
--O1/--output_fastq1: The first file for output paired FQs
+-O1/--output_fastq1: Output fastq file for the first read of paired linked-read sequencing data.
 
--O2/--output_fastq2: The second file for output paired FQs
+-O2/--output_fastq2: Output fastq file for the second read of paired linked-read sequencing data.
 
--OT/--output_type: The sequencing type for output FQs
+-OT/--output_type: Output fastq format. The unified linked read format (ULRF) is recommended.
 
 -B/--barcodes: The barcodes list used by different technology
 
--F/--filter: To filt the input FQs
+-F/--filter: Users can choose from (Yes, No). "Yes" indicates that LRTK will use fastp to filter reads.
 
--S/--sort: To sort the output FQs
+-S/--sort: Users can choose from (Yes, No). "Yes" indicates that LRTK will sort the reads based on barcodes.
 
--T/--threads: Number of threads
+-T/--threads: default = 1, this determines the number of threads used for bwa and samtools.
 
 ### function 2: example for unified barcode-aware alignment
 ```
@@ -176,7 +176,7 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 
 -P/--platform: {10x,stLFR,TELLSeq} linked-reads technology
 
--T/--threads: default = 1, this determines the number of threads used for bwa and samtools.
+-T/--threads: default = 1, this determines the number of threads used for ema, bwa and samtools.
 
 ### function 3: example for small variation calling
 ```
@@ -259,6 +259,8 @@ Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Ex
 Example_stLFR	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R2.fq	-	stLFR
 Example_TELLSeq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R2.fq /tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.index.fq TELLSeq
 ```
+# examples of report: 
+lrtk creates reports in the HTML format.
 
 # Troubleshooting
 If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
