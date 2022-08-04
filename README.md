@@ -157,7 +157,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 
 -OT/--output_type: Output fastq format. The unified linked read format (ULRF) is recommended.
 
--B/--barcodes: The barcodes list used by different technology
+-B/--barcodes: The recommended "WhiteList/white_list_*_barcode.fa" is the reference baecode files for 10x and stLFR technologies.
 
 -F/--filter: Users can choose from (Yes, No). "Yes" indicates that LRTK will use fastp to filter reads.
 
@@ -181,7 +181,7 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 
 -RG/--read_group:  Full read group string (e.g. '@RG\tID:foo\tSM:bar')
 
--R/--reference:  The reference sequence to align
+-R/--reference:  The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
 
 -O/--outfile:  The output alignment file.  
 
