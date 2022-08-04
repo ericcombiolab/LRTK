@@ -297,9 +297,9 @@ Example_stLFR	/path_to/Example.stLFR.R1.fq	/path_to/Example.stLFR.R2.fq	-	stLFR
 Example_TELLSeq	/path_to/Example.TellSeq.R1.fq	/path_to/Example.TellSeq.R2.fq /path_to/Example.TellSeq.index.fq TELLSeq
 ```
 # examples of report: 
-lrtk creates reports in the HTML format .
+lrtk creates reports in the HTML format.
 
-demo report(https://github.com/ericcombiolab/LRTK/blob/main/demo_report/LRTK.report.html)
+<a href="https://github.com/ericcombiolab/LRTK/blob/main/demo_report/LRTK.report.html">demo report</a> 
 
 # Troubleshooting
 If any question, please feel free to contact with me or my supervisor Dr.Eric Zhang.
