@@ -257,22 +257,44 @@ We show a simple example to process a single samples using the automatic pipelin
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
-The sample information file should be organized as:
+*parameters
+-OD/--outdir: The output directory.
+
+-DB/--database: The recommended "database" contains reference genome and barcode whitelist file  and can be downloaded from Zenodo.
+
+-RG/--read_group: Full read group string (e.g. '@RG\tID:foo\tSM:bar').
+
+-T/--threads: default = 1, this determines the number of threads used for variant phasing tool.
+
+-SI/--sample_info: The path to input sample information file.
+
+The Sinfo file (tab-separated) should be prepared as: 
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
-Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
+Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	10x
 ```
 ### function 8: example for multiple samples analysis
 We show a simple example to process multiple samples using the automatic pipeline, simultaneously. 
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
-The sample information file should be organized as:
+*parameters
+-OD/--outdir: The output directory.
+
+-DB/--database: The recommended "database" contains reference genome and barcode whitelist file  and can be downloaded from Zenodo.
+
+-RG/--read_group: Full read group string (e.g. '@RG\tID:foo\tSM:bar').
+
+-T/--threads: default = 1, this determines the number of threads used for variant phasing tool.
+
+-SI/--sample_info: The path to input sample information file.
+
+The Sinfo file (tab-separated) should be prepared as:
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
-Example_10x	path_to/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
-Example_stLFR	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.stLFR.R2.fq	-	stLFR
-Example_TELLSeq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.R2.fq /tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.TellSeq.index.fq TELLSeq
+Example_10x	/path_to/Example.10x.R1.fq	/path_to/Example.10x.R2.fq	-	10x
+Example_stLFR	/path_to/Example.stLFR.R1.fq	/path_to/Example.stLFR.R2.fq	-	stLFR
+Example_TELLSeq	/path_to/Example.TellSeq.R1.fq	/path_to/Example.TellSeq.R2.fq /path_to/Example.TellSeq.index.fq TELLSeq
 ```
 # examples of report: 
 lrtk creates reports in the HTML format.
