@@ -136,18 +136,12 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
 *Required parameters
---reference: "Aquila/source/ref.fa" is the reference fasta file you can download by "./install".
+--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+--reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+--application: The SNV/INDEL callers. Users can choose from (FreeBayes, Samtools, GATK).
+--threads: default = 1, this determines the number of threads used for SNV/INDEL caller. 
+--outfile: The final VCF file to write.
 
-*Optional parameters
---out_dir: default = ./Asssembly_results, make sure it's the same as "--out_dir" from Step1 if you want to define your own output directory name.
-
---num_threads: default = 30, this determines the number of files assembled simultaneously by SPAdes.
-
---num_threads_spades: default = 5, this is the "-t" for SPAdes.
-
---block_len_use: default = 100000 (100kb)
-
---chr_start --chr_end: if you only want to assembly some chromosomes or only one chromosome. For example: use "--chr_start 1 --chr_end 2"
 ### function 4: example for large variation calling
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
