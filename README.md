@@ -136,6 +136,7 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
 *parameters
+
 --bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
 
 --reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
