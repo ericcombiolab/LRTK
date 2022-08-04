@@ -151,6 +151,24 @@ $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
 ```
+*parameters
+
+-B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+
+-R/--reference: The recommanded "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+
+-A/--application: The SV caller. Users can choose from (Aquila, LinkedSV, VALOR).
+
+-T/--threads: default = 1, this determines the number of threads used for SNV/INDEL caller. 
+
+-O/--outfile: The final VCF file to write.
+
+-U/--uniqness:  The recommanded "Uniqness_map/" is required database for Aquila. It can be downloaded from Zenodo.
+
+-S/--sonic: The recommanded "sonic/" is required database for VALOR. It can be downloaded from Zenodo.
+
+-V/--vcf: The recommanded "path_to_test/Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
+
 
 ### function 5: example for variation phasing
 ```
