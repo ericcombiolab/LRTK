@@ -45,13 +45,13 @@ example
     |-Example.TELLSeq.R1.fq
     |-Example.TELLSeq.R2.fq
 |-LargeFQs
-    |-Example.10x.R1.fq
-    |-Example.10x.R2.fq
-    |-Example.stLFR.R1.fq
-    |-Example.stLFR.R2.fq
-    |-Example.TELLSeq.index.fq
-    |-Example.TELLSeq.R1.fq
-    |-Example.TELLSeq.R2.fq
+    |-Example.large.10x.R1.fq
+    |-Example.large.10x.R2.fq
+    |-Example.large.stLFR.R1.fq
+    |-Example.large.stLFR.R2.fq
+    |-Example.large.TELLSeq.index.fq
+    |-Example.large.TELLSeq.R1.fq
+    |-Example.large.TELLSeq.R2.fq
 ```
 
 # Running examples
@@ -61,7 +61,7 @@ The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on t
 lrtk -h 
 ```
 ```
-usage: LRTK version 1.3
+usage: lrtk version 1.3
 
 Linked Reads ToolKit
 
