@@ -209,7 +209,7 @@ $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 
 -O/--outfile: The final VCF file to write.
 
-### function 5: example for large variation calling
+### function 5: example for structural variation calling
 ```
 $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQNESS
 ```
@@ -232,7 +232,7 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 -V/--vcf: The recommended "Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
 
 
-### function 6: example for variation phasing
+### function 6: example for variant phasing
 ```
 $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ```
