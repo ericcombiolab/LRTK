@@ -154,15 +154,25 @@ $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ
 ```
 *parameters:
 -BQ1/--input_barcoded_fastq1: The first input file for barcoded paired FQs
+
 -BQ2/--input_barcoded_fastq2: The second input file for bararcoded paired FQs
+
 -FQ1/--input_fastq1:  The first input file for no Barcoded paired FQs
+
 -FQ2/--input_fastq2:  The first input file for no Barcoded paired FQs
+
 -RG/--read_group:  The read group string
+
 -R/--reference:  The reference sequence to align
+
 -O/--outfile:  The output bamfile
+
 -S/--sort: To sort bam file by barcode
+
 -M/--mark_duplication: To mark the duplicated reads by barcode
+
 -P/--platform: {10x,stLFR,TELLSeq} linked-reads technology
+
 -T/--threads: Number of threads
 
 ### function 3: example for small variation calling
