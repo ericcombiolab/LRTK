@@ -94,9 +94,8 @@ BLTELLSeq=${DATABASE}"/WhiteList/4M-with-alts-february-2016.TELLSeq.txt"
 GRCH38=${DATABASE}"/GRCH38/genome.fa"
 SONIC=${DATABASE}"/sonic/GRCh38.sonic"
 UNIQNESS=${DATABASE}"/Uniqness_map/"
-
-## Commands for raw read and variant analysis
 ```
+## Commands for raw read and variant analysis
 ### function 1: format conversion across diverse linked-read data formats
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
