@@ -159,7 +159,7 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 
 -A/--application: The SV caller. Users can choose from (Aquila, LinkedSV, VALOR).
 
--T/--threads: default = 1, this determines the number of threads used for SNV/INDEL caller. 
+-T/--threads: default = 1, this determines the number of threads used for SV caller. 
 
 -O/--outfile: The final VCF file to write.
 
