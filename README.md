@@ -55,6 +55,29 @@ example
 ```
 
 # Running examples
+## The Wrapper
+```
+lrtk -h 
+usage: LRTK version 1.3
+
+Linked Reads ToolKit
+
+positional arguments:
+  {checkENV,MKFQ,FQCONVER,ALIGN,SNV,SV,PHASE,WGS}
+    checkENV            To check the environment
+    MKFQ                To simulate the linked reads
+    FQCONVER            To convert different FASTQ formats
+    ALIGN               To map reads to reference genome
+    SNV                 To call small variants such as SNPs and INDELs
+    SV                  To call large structural variants
+    PHASE               To phase germline variations
+    WGS                 Automatic pipeline to perform SNV/INDEL/SV calling and
+                        phasing
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+```
 To simplify the following description, we will firstly define some commonly used variables here.
 ```
 ###working environment
