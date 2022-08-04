@@ -126,12 +126,44 @@ UNIQNESS=${DATABASE}"/Uniqness_map/"
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
 ```
-
+-I1/--input_fastq1 INPUT_FASTQ1
+                        The first file for paired FQs
+  -I2 INPUT_FASTQ2, --input_fastq2 INPUT_FASTQ2
+                        The second file for paired FQs
+  -ID INDEX_FASTQ, --index_fastq INDEX_FASTQ
+                        The index file for paired FQs
+  -IT {10x,stLFR,TELLSeq}, --input_type {10x,stLFR,TELLSeq}
+                        The sequencing type for input FQs
+  -O1 OUTPUT_FASTQ1, --output_fastq1 OUTPUT_FASTQ1
+                        The first file for output paired FQs
+  -O2 OUTPUT_FASTQ2, --output_fastq2 OUTPUT_FASTQ2
+                        The second file for output paired FQs
+  -OT {10x,ULRF}, --output_type {10x,ULRF}
+                        The sequencing type for output FQs
+  -B BARCODES, --barcodes BARCODES
+                        The barcodes list used by different technology
+  -F {Yes,No}, --filter {Yes,No}
+                        To filt the input FQs
+  -S {Yes,No}, --sort {Yes,No}
+                        To sort the output FQs
+  -T THREADS, --threads THREADS
+                        Number of threads
 ### function 2: example for unified barcode-aware alignment
 ```
 $LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
-
+*parameters:
+-BQ1/--input_barcoded_fastq1: The first input file for barcoded paired FQs
+-BQ2/--input_barcoded_fastq2: The second input file for bararcoded paired FQs
+-FQ1/--input_fastq1:  The first input file for no Barcoded paired FQs
+-FQ2/--input_fastq2:  The first input file for no Barcoded paired FQs
+-RG/--read_group:  The read group string
+-R/--reference:  The reference sequence to align
+-O/--outfile:  The output bamfile
+-S/--sort: To sort bam file by barcode
+-M/--mark_duplication: To mark the duplicated reads by barcode
+-P/--platform: {10x,stLFR,TELLSeq} linked-reads technology
+-T/--threads: Number of threads
 
 ### function 3: example for small variation calling
 ```
