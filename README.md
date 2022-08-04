@@ -56,7 +56,7 @@ example
 
 # Running examples
 ## The Wrapper
-The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on the command and you will get the following helo information. 
+The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on the command and the helo information will be printed. 
 ```
 lrtk -h 
 ```
