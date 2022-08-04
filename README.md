@@ -119,6 +119,7 @@ $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ## Commands for automatic pipeline
 LRTK provides an easy-to-use automatic pipeline to handle the linked-read sequencing data from single or multiple samples. The user may only prepare the linked-read sequencing ﬁles (FASTQ format) and adequate computational resources, LRTK will run the whole pipeline and generate the final report. 
 ### function 6：example for single sample analysis
+We show a simple example to process a single samples using the automatic pipeline. 
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
@@ -128,6 +129,7 @@ The sample information file should be organized as:
 Example_10x	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R1.fq	/tmp/local/cschaoyang/SOFTWARE/LRTK/LRTK1.2/lrtk/example/LargeFQs/Example.10x.R2.fq	-	10x
 ```
 ### function 7: example for multiple samples analysis
+We show a simple example to process multiple samples using the automatic pipeline, simultaneously. 
 ```
 $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32
 ```
