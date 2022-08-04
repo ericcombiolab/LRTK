@@ -128,28 +128,27 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 ```
 *parameters:
 
-  -I1/--input_fastq1 INPUT_FASTQ1
-                        The first file for paired FQs
-  -I2 INPUT_FASTQ2, --input_fastq2 INPUT_FASTQ2
-                        The second file for paired FQs
-  -ID INDEX_FASTQ, --index_fastq INDEX_FASTQ
-                        The index file for paired FQs
-  -IT {10x,stLFR,TELLSeq}, --input_type {10x,stLFR,TELLSeq}
-                        The sequencing type for input FQs
-  -O1 OUTPUT_FASTQ1, --output_fastq1 OUTPUT_FASTQ1
-                        The first file for output paired FQs
-  -O2 OUTPUT_FASTQ2, --output_fastq2 OUTPUT_FASTQ2
-                        The second file for output paired FQs
-  -OT {10x,ULRF}, --output_type {10x,ULRF}
-                        The sequencing type for output FQs
-  -B BARCODES, --barcodes BARCODES
-                        The barcodes list used by different technology
-  -F {Yes,No}, --filter {Yes,No}
-                        To filt the input FQs
-  -S {Yes,No}, --sort {Yes,No}
-                        To sort the output FQs
-  -T THREADS, --threads THREADS
-                        Number of threads
+-I1/--input_fastq1 INPUT_FASTQ1 The first file for paired FQs
+
+-I2 INPUT_FASTQ2, --input_fastq2 INPUT_FASTQ  The second file for paired FQs
+
+-ID INDEX_FASTQ, --index_fastq INDEX_FASTQ The index file for paired FQs
+
+-IT {10x,stLFR,TELLSeq}, --input_type {10x,stLFR,TELLSeq} The sequencing type for input FQs
+
+-O1 OUTPUT_FASTQ1, --output_fastq1 OUTPUT_FASTQ1   The first file for output paired FQs
+
+-O2 OUTPUT_FASTQ2, --output_fastq2 OUTPUT_FASTQ2   The second file for output paired FQs
+
+-OT {10x,ULRF}, --output_type {10x,ULRF}  The sequencing type for output FQs
+
+-B BARCODES, --barcodes BARCODES      The barcodes list used by different technology
+
+-F {Yes,No}, --filter {Yes,No} To filt the input FQs
+
+-S {Yes,No}, --sort {Yes,No}     To sort the output FQs
+
+-T THREADS, --threads THREADS   Number of threads
 
 ### function 2: example for unified barcode-aware alignment
 ```
