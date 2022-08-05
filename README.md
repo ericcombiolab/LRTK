@@ -66,21 +66,20 @@ The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on t
 lrtk -h 
 ```
 ```
-usage: lrtk version 1.3
+usage: lrtk version 1.5
 
 Linked Reads ToolKit
 
 positional arguments:
   {checkENV,MKFQ,FQCONVER,ALIGN,SNV,SV,PHASE,WGS}
-    checkENV            To check the environment
-    MKFQ                To simulate the linked reads
-    FQCONVER            To convert different FASTQ formats
-    ALIGN               To map reads to reference genome
-    SNV                 To call small variants such as SNPs and INDELs
-    SV                  To call large structural variants
-    PHASE               To phase germline variations
-    WGS                 Automatic pipeline to perform SNV/INDEL/SV calling and
-                        phasing
+    checkENV            Check the working environment
+    MKFQ                Simulate linked-reads
+    FQCONVER            Convert FASTQ formats
+    ALIGN               Align reads to the reference genome
+    SNV                 Detect SNVs and INDELs
+    SV                  Detect structural variations
+    PHASE               Phase germline variations
+    WGS                 Run the whole pipeline
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -88,43 +87,56 @@ optional arguments:
 ```
 To simplify the following descriptions in running examples, we will firstly define some commonly used variables here.
 ```
-###working environment
-LRTK=path_to_lrtk
-curP=path_to_working directory
+LRTK=`which lrtk`
+curP=`pwd`
 DATABASE=path_to_default database
-OUTDIR=${curP}"/WGS/"
+OUTDIR="./WGS/"
 
 ###input files
-raw10xFQ1=${curP}"/FQs/Example.10x.R1.fq"
-raw10xFQ2=${curP}"/FQs/Example.10x.R2.fq"
-rawstLFRFQ1=${curP}"/FQs/Example.stLFR.R1.fq"
-rawstLFRFQ2=${curP}"/FQs/Example.stLFR.R2.fq"
-rawTELLSeqFQ1=${curP}"/FQs/Example.TELLSeq.R1.fq"
-rawTELLSeqFQ2=${curP}"/FQs/Example.TELLSeq.R2.fq"
-rawTELLSeqFQi=${curP}"/FQs/Example.TELLSeq.index.fq"
+#We have included a small data sets (FQs) and a large data sets (LargeFQs) on Zenodo (https://zenodo.org/record/6792169).
+#The small data set can be used to quickly test the raw read analysis module.
+#The large data set can be used to test all the commands and generate the final HTML report.
 
-barcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wb.fq"
-barcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wb.fq"
-nobarcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wob.fq"
-nobarcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wob.fq"
+raw10xFQ1="./example/FQs/Example.10x.R1.fq"
+raw10xFQ2="./example/FQs/Example.10x.R2.fq"
+rawstLFRFQ1="./example/FQs/Example.stLFR.R1.fq"
+rawstLFRFQ2="./example/FQs/Example.stLFR.R2.fq"
+rawTELLSeqFQ1="./example/FQs/Example.TELLSeq.R1.fq"
+rawTELLSeqFQ2="./example/FQs/Example.TELLSeq.R2.fq"
+rawTELLSeqFQi="./example/FQs/Example.TELLSeq.index.fq"
 
-Sinfo=${curP}"/sample.info"
+raw10xFQ1_large="./example/LargeFQs/Example.large.10x.R1.fq"
+raw10xFQ2_large="./example/LargeFQs/Example.large.10x.R2.fq"
+rawstLFRFQ1_large="./example/LargeFQs/Example.large.stLFR.R1.fq"
+rawstLFRFQ2_large="./example/LargeFQs/Example.large.stLFR.R2.fq"  
+rawTELLSeqFQ1_large="./example/LargeFQs/Example.large.TELLSeq.R1.fq"  
+rawTELLSeqFQ2_large="./example/LargeFQs/Example.large.TELLSeq.R2.fq"  
+rawTELLSeqFQi_large="./example/LargeFQs/Example.large.TELLSeq.index.fq" 
 
-#output files
-outFQ1=${curP}"/test/Example.R1.fq"
-outFQ2=${curP}"/test/Example.R2.fq"
-outBAM=${curP}"/test/Example.bam"
-outVCF1=${curP}"/test/Example.small.variants.vcf"
-outVCF2=${curP}"/test/Example.large.variants.vcf"
-outVCF3=${curP}"/test/Example.small.variants.phased.vcf"
+### intermediate results
+barcoded10xFQ1="./Example.R1.fq.sort.wb.fq"  
+barcoded10xFQ2="./Example.R2.fq.sort.wb.fq"  
+nobarcoded10xFQ1="./Example.R1.fq.sort.wob.fq"  
+nobarcoded10xFQ2="./Example.R2.fq.sort.wob.fq"  
+
+### should be prepared by users to test the WGS command
+Sinfo="./sample.info"  
+
+###output files
+outFQ1="./Example.R1.fq"
+outFQ2="./Example.R2.fq"
+outBAM="./Example.bam"
+outVCF1="./Example.small.variants.vcf"
+outVCF2="./Example.large.variants.vcf"
+outVCF3="./Example.small.variants.phased.vcf"
 
 ###database
-BL10x=${DATABASE}"/WhiteList/white_list_10x_barcode.fa"
-BLstLFR=${DATABASE}"/WhiteList/white_list_stlfr_barcode.fa"
-BLTELLSeq=${DATABASE}"/WhiteList/4M-with-alts-february-2016.TELLSeq.txt"
-GRCH38=${DATABASE}"/GRCH38/genome.fa"
-SONIC=${DATABASE}"/sonic/GRCh38.sonic"
-UNIQNESS=${DATABASE}"/Uniqness_map/"
+BL10x="./database/WhiteList/white_list_10x_barcode.fa"
+BLstLFR="./database/WhiteList/white_list_stlfr_barcode.fa"
+BLTELLSeq="./database/WhiteList/4M-with-alts-february-2016.TELLSeq.txt"
+GRCH38="./database/GRCH38/genome.fa"
+SONIC="./database/sonic/GRCh38.sonic"
+UNIQNESS="./database/Uniqness_map/"
 ```
 ## Commands for raw read and variant analysis
 
@@ -292,9 +304,9 @@ $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example"
 The Sinfo file (tab-separated) should be prepared as:
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
-Example_10x	/path_to/Example.10x.R1.fq	/path_to/Example.10x.R2.fq	-	10x
-Example_stLFR	/path_to/Example.stLFR.R1.fq	/path_to/Example.stLFR.R2.fq	-	stLFR
-Example_TELLSeq	/path_to/Example.TellSeq.R1.fq	/path_to/Example.TellSeq.R2.fq /path_to/Example.TellSeq.index.fq TELLSeq
+Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	10x
+Example_stLFR	/path_to/Example.large.stLFR.R1.fq	/path_to/Example.large.stLFR.R2.fq	-	stLFR
+Example_TELLSeq	/path_to/Example.large.TellSeq.R1.fq	/path_to/Example.large.TellSeq.R2.fq /path_to/Example.large.TellSeq.index.fq TELLSeq
 ```
 # examples of report: 
 lrtk creates reports in the HTML format.
