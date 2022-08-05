@@ -170,7 +170,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 
 -OT/--output_type: Output fastq format. The unified linked read format (ULRF) is recommended.
 
--B/--barcodes: The recommended "WhiteList/white_list_*_barcode.fa" is the reference baecode files for 10x and stLFR technologies.
+-B/--barcodes: The recommended "WhiteList/white_list_*_barcode.fa" is the reference barcode files for 10x and stLFR technologies.
 
 -F/--filter: Users can choose from (Yes, No). "Yes" indicates that LRTK will use fastp to filter reads.
 
