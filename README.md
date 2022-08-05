@@ -38,7 +38,7 @@ database
 |-WhiteList
 |-Uniqness_map
 ```
-In addition, we provide multiple example linked-read sequencing data to run LRTK. We have included the small data sets (FQs) in github and stored the large data sets on Zenodo  (https://zenodo.org/record/6792169) to generate the HTML report. 
+In addition, we provide multiple example linked-read sequencing data to run LRTK. We have included the small data sets (FQs) and the large data sets (LargeFQs) on Zenodo  (https://zenodo.org/record/6792169). The small data set can be used to quickly test raw read analysis module only. The Large data set can be used to test all the functions and generate a demo report for the WGS function.
 ```
 example
 |-FQs/
