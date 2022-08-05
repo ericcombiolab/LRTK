@@ -145,6 +145,7 @@ UNIQNESS="./database/Uniqness_map/"
 $LRTK MKFQ -CF "./example/FQs/simulation/diploid_config" -IT 10x
 ```
 *parameters:
+
 -CF/--config_file: The path to config_files about simulation
 
 -IT/--input_type: Input sequencing technology. Users can choose from (10x,stLFR).
