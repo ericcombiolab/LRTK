@@ -1,6 +1,6 @@
 # LRTK: A unified and versatile toolkit for analyzing linked-read sequencing data
 # Overview
- LRTK is an easy-to-use tool kit to handle linked-read sequencing data a unfrom 10x genomics, stLFR, and TELL-Seq technologies. It contains a suite of utilities to perform data simulation, format conversion, data preprocessing, barcode-aware read alignment, quality control, variant detection and phasing (SNP/INDEL/SV). In particular, LRTK is open-source and can gen-erate a HTML report to calculate the key parameters for library prepara-tion and summarize the quality statistics of sequenced reads.
+ LRTK is an easy-to-use tool kit to handle linked-read sequencing data from 10x genomics, stLFR, and TELL-Seq technologies. It contains a suite of utilities to perform data simulation, format conversion, data preprocessing, barcode-aware read alignment, quality control, variant detection and phasing (SNP/INDEL/SV). In particular, LRTK is open-source and can gen-erate a HTML report to calculate the key parameters for library prepara-tion and summarize the quality statistics of sequenced reads.
  
 ![Main](https://user-images.githubusercontent.com/3699571/163749053-543ed7df-fb8f-4aa7-8c7e-3615b756e759.gif)
 # Install through Bioconda
