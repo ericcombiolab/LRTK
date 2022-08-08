@@ -1,9 +1,9 @@
 # LRTK: A unified and versatile toolkit for analyzing linked-read sequencing data
 # Overview
- LRTK is an easy-to-use tool kit to handle linked-read sequencing data from 10x genomics, stLFR, and TELL-Seq technologies. It contains a suite of utilities to perform data simulation, format conversion, data preprocessing, barcode-aware read alignment, quality control, variant detection and phasing (SNV/INDEL/SV). In particular, LRTK is open-source and can generate a HTML report to calculate the key parameters for library preparation and summarize the quality statistics of sequenced reads.
+ LRTK is an easy-to-use toolkit to process linked-read sequencing data from 10x genomics, stLFR, and TELL-Seq technologies. It contains a suite of utilities to perform data simulation, format conversion, data preprocessing, barcode-aware read alignment, quality control, variant detection and phasing (SNV/INDEL/SV). In particular, LRTK is open-source and can generate a HTML report to calculate the key parameters for library preparation and summarize the quality statistics of sequenced reads.
  
 ![Main](https://user-images.githubusercontent.com/3699571/163749053-543ed7df-fb8f-4aa7-8c7e-3615b756e759.gif)
-# Install through Bioconda
+# Install using Bioconda
 ## bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
 ```
@@ -11,26 +11,12 @@ conda install -c bioconda lrtk
 lrtk -h
 ```
 ## dependencies
-LRTK is mainly implemented by python3 and requires python packages, such as numpy, pysam, scipy and sortedcontainers. The dependent tools will be installed automatically, including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin, 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth, 2012), HapCUT2 (Edge et al., 2017) and SAMtools (Li et al., 2009). 
-```
-conda install -c bioconda aquila
-conda install -c bioconda bcftools
-conda install -c bioconda bwa
-conda install -c bioconda fastp
-conda install -c bioconda freebayes
-conda install -c bioconda gatk3
-conda install -c bioconda hapcut2
-conda install -c bioconda parallel
-conda install -c bioconda picard
-conda install -c bioconda samtools
-conda install -c bioconda whatshap
-conda install -c bioconda vcflib
-```
-Furthermore, LinkedSV (Fang et al., 2019), SpecHap (Yu et al., 2021) and VALOR2 (Karaoǧlanoǧlu et al., 2020) needed to be installed by the users because they are not supported by conda. 
+LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pysam, scipy and sortedcontainers. Some of them will be installed using conda automatically, including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin, 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth, 2012), HapCUT2 (Edge et al., 2017) and SAMtools (Li et al., 2009). 
+Furthermore, LinkedSV (Fang et al., 2019), SpecHap (Yu et al., 2021) and VALOR2 (Karaoǧlanoǧlu et al., 2020) that are not supported by conda are needed to be installed by users. 
 
-## example data in Zenodo
-The default database can be downloaded from Zenodo (https://zenodo.org/record/6792169).
-The database directory should be organized as:
+## Example data in Zenodo
+The required database can be downloaded from Zenodo (https://zenodo.org/record/6792169).
+The directory is organized as:
 ```
 database
 |-GRCH38
@@ -38,7 +24,7 @@ database
 |-WhiteList
 |-Uniqness_map
 ```
-In addition, we provide multiple example linked-read sequencing data to run LRTK. We have included a small data sets (FQs) and a large data sets (LargeFQs) on Zenodo (https://zenodo.org/record/6792169). The small data set can be used to quickly test the raw read analysis module.The large data set can be used to test all the commands and generate the final HTML report.
+In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a small dataset (FQs) and a large dataset (LargeFQs) on Zenodo (https://zenodo.org/record/6792169). The small dataset is used to quickly test the raw read analysis module.The large data set can be used to test all the fucntions and generate the final HTML report.
 ```
 example
 |-FQs/
@@ -60,8 +46,8 @@ example
 ```
 
 # Running examples
-## The Wrapper
-The simplest way to get familiar with lrtk is the wrapper: typing "lrtk -h" on the command and the help information will be printed. 
+## Help information
+Type "lrtk -h" and the help information will be printed.
 ```
 lrtk -h 
 ```
@@ -140,43 +126,43 @@ UNIQNESS="./database/Uniqness_map/"
 ```
 ## Commands for raw read and variant analysis
 
-### function 1: example for linked-read simulator
+### function 1: example for linked-read simulation
 ```
 $LRTK MKFQ -CF "./example/FQs/simulation/diploid_config" -IT 10x
 ```
 *parameters:
 
--CF/--config_file: The path to config_files about simulation
+-CF/--config_file: The path to config_files for linked-read simulation
 
--IT/--input_type: Input sequencing technology. Users can choose from (10x,stLFR).
+-IT/--input_type: Platform. Users can choose from 10x or stLFR.
 
-### function 2: example for format conversion across diverse linked-read data formats
+### function 2: example for format conversion across different linked-read data formats
 ```
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -T 4 
 ```
 *parameters:
 
--I1/--input_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data.
+-I1/--input_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired-end linked-read sequencing data.
 
--I2/--input_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data.
+-I2/--input_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired-end linked-read sequencing data.
 
 -ID/--index_fastq: Input index file (uncompressed FASTQ format) for paired linked-read sequencing data.
 
--IT/--input_type: Input sequencing technology. Users can choose from (10x,stLFR,TELLSeq).
+-IT/--input_type: Platforms. Users can choose from 10x,stLFR or TELLSeq.
 
--O1/--output_fastq1: Output fastq file for the first read of paired linked-read sequencing data.
+-O1/--output_fastq1: Output fastq file for the first read of paired-end linked-read sequencing data.
 
--O2/--output_fastq2: Output fastq file for the second read of paired linked-read sequencing data.
+-O2/--output_fastq2: Output fastq file for the second read of paired-end linked-read sequencing data.
 
 -OT/--output_type: Output fastq format. The unified linked read format (ULRF) is recommended.
 
--B/--barcodes: The recommended "WhiteList/white_list_*_barcode.fa" is the reference barcode files for 10x and stLFR technologies.
+-B/--barcodes: Path to barcode whitlist.
 
--F/--filter: Users can choose from (Yes, No). "Yes" indicates that LRTK will use fastp to filter reads.
+-F/--filter: Yes/No. "Yes" indicates that LRTK will use fastp to filter reads.
 
--S/--sort: Users can choose from (Yes, No). "Yes" indicates that LRTK will sort the reads based on barcodes.
+-S/--sort: Yes/No. "Yes" indicates that LRTK will sort the reads based on barcodes.
 
--T/--threads: default = 1, this determines the number of threads used for bwa and samtools.
+-T/--threads: default = 1, the number of threads used for BWA and SAMtools.
 
 ### function 3: example for unified barcode-aware alignment
 ```
@@ -212,15 +198,15 @@ $LRTK SNV -B $outBAM -R $GRCH38 -A "FreeBayes" -T 4 -O $outVCF1
 ```
 *parameters
 
--B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+-B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+-R/--reference: Reference genome.
 
--A/--application: The SNV/INDEL caller. Users can choose from (FreeBayes, Samtools, GATK).
+-A/--application: The SNV/INDEL caller (FreeBayes, Samtools or GATK).
 
--T/--threads: default = 1, this determines the number of threads used for SNV/INDEL caller. 
+-T/--threads: The number of threads used in SNV/INDEL caller (default: 1).
 
--O/--outfile: The final VCF file to write.
+-O/--outfile: Output VCF file.
 
 ### function 5: example for structural variation calling
 ```
@@ -228,21 +214,21 @@ $LRTK SV -B $outBAM -R $GRCH38 -A "Aquila" -T 4 -O $outVCF2 -V $outVCF1 -U $UNIQ
 ```
 *parameters
 
--B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+-B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+-R/--reference: Reference genome.
 
--A/--application: The SV caller. Users can choose from (Aquila, LinkedSV, VALOR).
+-A/--application: The SV caller (Aquila, LinkedSV or VALOR).
 
--T/--threads: default = 1, this determines the number of threads used for SV caller. 
+-T/--threads: The number of threads used in SNV/INDEL caller (default: 1).
 
--O/--outfile: The final VCF file to write.
+-O/--outfile: Output VCF file.
 
--U/--uniqness:  The recommended "Uniqness_map/" is required database for Aquila. It can be downloaded from Zenodo.
+-U/--uniqness: "Uniqness_map/" is a required database for Aquila, which can be downloaded from Zenodo.
 
--S/--sonic: The recommended "sonic/" is required database for VALOR. It can be downloaded from Zenodo.
+-S/--sonic: "sonic/" is a required database for VALOR, which can be downloaded from Zenodo.
 
--V/--vcf: The recommended "Example.small.variants.vcf" is a VCF file generated from aforementioned SNV function.
+-V/--vcf: VCF file generated from ```SNV``` function.
 
 
 ### function 6: example for variant phasing
@@ -251,20 +237,21 @@ $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 4 -V $outVCF1 -O $outVCF3
 ```
 *parameters
 
--B/--bam: The alignment file (.bam) obtained from aforementioned ALIGN function.  
+-B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+-R/--reference: Reference genome.
 
--A/--application: The variant phasing tool. Users can choose from (HapCUT2, WhatsHap, SpecHap).
+-A/--application: The variant phasing tool (HapCUT2, WhatsHap or SpecHap).
 
--T/--threads: default = 1, this determines the number of threads used for variant phasing tool. 
+-T/--threads: The number of threads used for variant phasing tool (default: 1). 
 
--O/--outfile: The final phased VCF file to write.
+-O/--outfile: Output phased VCF file.
 
--V/--vcf: The recommended "Example.small.variants.vcf" is the input variants to phase.
+-V/--vcf: VCF with variants to phase.
 
 ## Commands for automatic pipeline
-LRTK provides an easy-to-use automatic pipeline to handle the linked-read sequencing data from single or multiple samples. The user may only prepare the linked-read sequencing ﬁles (FASTQ format) and adequate computational resources, LRTK will run the whole pipeline and generate the final report. 
+LRTK provides an easy-to-use automatic pipeline to process linked-read sequencing from single or multiple samples. Users only need to prepare FASTQ files, LRTK will run the whole pipeline and generate the final report. 
+
 ### function 7：example for single sample analysis
 We show a simple example to process a single samples using the automatic pipeline. 
 ```
@@ -273,15 +260,15 @@ $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example"
 *parameters
 -OD/--outdir: The output directory.
 
--DB/--database: The recommended "database" contains reference genome and barcode whitelist file  and can be downloaded from Zenodo.
+-DB/--database: The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Zenodo.
 
--RG/--read_group: Full read group string (e.g. '@RG\tID:foo\tSM:bar').
+-RG/--read_group: Read group (e.g. '@RG\tID:foo\tSM:bar').
 
--T/--threads: default = 1, this determines the number of threads used for variant phasing tool.
+-T/--threads: The number of threads used for variant phasing tool (default: 1).
 
--SI/--sample_info: The path to input sample information file.
+-SI/--sample_info: The path to Sinfo (sample information file).
 
-The Sinfo file (tab-separated) should be prepared as: 
+The Sinfo (tab-separated) should be prepared as: 
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
 Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	10x
@@ -294,15 +281,15 @@ $LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example"
 *parameters
 -OD/--outdir: The output directory.
 
--DB/--database: The recommended "database" contains reference genome and barcode whitelist file  and can be downloaded from Zenodo.
+-DB/--database: The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Zenodo.
 
--RG/--read_group: Full read group string (e.g. '@RG\tID:foo\tSM:bar').
+-RG/--read_group: Read group (e.g. '@RG\tID:foo\tSM:bar').
 
--T/--threads: default = 1, this determines the number of threads used for variant phasing tool.
+-T/--threads: The number of threads used for variant phasing tool (default: 1).
 
--SI/--sample_info: The path to input sample information file.
+-SI/--sample_info: The path to Sinfo (sample information file).
 
-The Sinfo file (tab-separated) should be prepared as:
+The Sinfo (tab-separated) should be prepared as:
 ```
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
 Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	10x
