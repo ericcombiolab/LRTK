@@ -214,7 +214,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 
 -I2/--input_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired-end linked-read sequencing data.
 
--ID/--index_fastq: Input index file (uncompressed FASTQ format) for paired linked-read sequencing data.
+-ID/--index_fastq: Input index file (uncompressed FASTQ format) for paired linked-read sequencing data. This files only contains information about barcode sequence.
 
 -IT/--input_type: Platforms. Users can choose from 10x,stLFR or TELLSeq.
 
