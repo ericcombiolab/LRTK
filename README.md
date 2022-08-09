@@ -37,6 +37,7 @@ example
     |-Example.TELLSeq.index.fq
     |-Example.TELLSeq.R1.fq
     |-Example.TELLSeq.R2.fq
+    |-simulation
 |-LargeFQs
     |-Example.large.10x.R1.fq
     |-Example.large.10x.R2.fq
