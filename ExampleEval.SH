@@ -4,6 +4,8 @@
 ###main program
 LRTK=`which lrtk`
 curP=`pwd`
+DATABASE=path_to_default database
+OUTDIR="./WGS/"
 
 ###input files
 raw10xFQ1="./example/FQs/Example.10x.R1.fq"
@@ -22,6 +24,21 @@ outVCF1="./Example.small.variants.vcf"
 outVCF2="./Example.large.variants.vcf"
 outVCF3="./Example.small.variants.phased.vcf"
 
+### intermediate results: 
+#barcoded10xFQ* and nobarcoded10xFQ* could be generated from the FQCONVER command.
+#The output of FQCONVER includes three pairs of FASTQ files (Example.R1/2.fq, Example.R1/2.fq.sort.wb.fq and Example.R1/2.fq.sort.wob.fq).
+#The Example.R1/2.fq contains all reads.
+#The Example.R1/2.fq.sort.wb.fq contains only reads with barcode annotation and is sorted based on the barcode sequence.
+#The Example.R1/2.fq.sort.wob.fq contains only reads without barcode annotation and is sorted based on the genomic coordinates.
+
+barcoded10xFQ1="./Example.R1.fq.sort.wb.fq"  
+barcoded10xFQ2="./Example.R2.fq.sort.wb.fq"  
+nobarcoded10xFQ1="./Example.R1.fq.sort.wob.fq"  
+nobarcoded10xFQ2="./Example.R2.fq.sort.wob.fq"  
+
+### should be prepared by users to test the WGS command
+Sinfo="./sample.info"  
+
 ###database
 BL10x="./database/WhiteList/white_list_10x_barcode.fa"
 BLstLFR="./database/WhiteList/white_list_stlfr_barcode.fa"
@@ -39,11 +56,8 @@ $LRTK MKFQ -CF "./example/FQs/simulation/diploid_config" -IT 10x
 $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BL10x -F Yes -S Yes -T 4
 
 ######################################################## ALIGNMENT  ############################################################
-barcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wb.fq"
-barcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wb.fq"
-nobarcoded10xFQ1=${curP}"/test/Example.R1.fq.sort.wob.fq"
-nobarcoded10xFQ2=${curP}"/test/Example.R2.fq.sort.wob.fq"
-$LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:NA12878\tSM:NA12878" -S Yes -M Yes -P 10x -T 4
+###.bam file
+$LRTK ALIGN -BQ1 $barcoded10xFQ1 -BQ2 $barcoded10xFQ2 -FQ1 $nobarcoded10xFQ1 -FQ2 $nobarcoded10xFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:Example\tSM:Example" -S Yes -M Yes -P 10x -T 4
 
 ######################################################### SNV calling ############################################################
 #SNV
@@ -59,26 +73,24 @@ $LRTK PHASE -B $outBAM -R $GRCH38 -A "HapCUT2" -T 12 -V $outVCF1 -O $outVCF3
 
 ######################################################### WGS pipeline ###########################################################
 #WGS
-si=${curP}"/sample.info"
-od=${curP}"/WGS/"
-$LRTK WGS -SI $si -OD $od -DB $DATABASE -RG "@RG\tID:NA12878\tSM:NA12878" -T 32
+$LRTK WGS -SI $Sinfo -OD $OUTDIR -DB $DATABASE -RG "@RG\tID:Example\tSM:Example" -T 32 
 
 ############################################################ others ##############################################################
 ###stLFR FQCONVER
 $LRTK FQCONVER -I1 $rawstLFRFQ1 -I2 $rawstLFRFQ2 -IT stLFR -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BLstLFR -F Yes -S Yes -T 4
 
 ### stLFR alignment
-barcodedstLFRFQ1=${curP}"/test/Example.R1.fq.sort.wb.fq"
-barcodedstLFRFQ2=${curP}"/test/Example.R2.fq.sort.wb.fq"
-nobarcodedstLFRFQ1=${curP}"/test/Example.R1.fq.sort.wob.fq"
-nobarcodedstLFRFQ2=${curP}"/test/Example.R2.fq.sort.wob.fq"
+barcodedstLFRFQ1="./Example.R1.fq.sort.wb.fq"
+barcodedstLFRFQ2="./Example.R2.fq.sort.wb.fq"
+nobarcodedstLFRFQ1="./Example.R1.fq.sort.wob.fq"
+nobarcodedstLFRFQ2="./Example.R2.fq.sort.wob.fq"
 $LRTK ALIGN -BQ1 $barcodedstLFRFQ1 -BQ2 $barcodedstLFRFQ2 -FQ1 $nobarcodedstLFRFQ1 -FQ2 $nobarcodedstLFRFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:foo\tSM:bar" -S Yes -M Yes -P stLFR -T 4
 
 ###TELLSeq 2 ULRF
 $LRTK FQCONVER -I1 $rawTELLSeqFQ1 -I2 $rawTELLSeqFQ2 -IT TELLSeq -ID $rawTELLSeqFQi -O1 $outFQ1 -O2 $outFQ2 -OT ULRF -B $BLstLFR -F Yes -S Yes -T 4
 
-barcodedtellseqFQ1=${curP}"/test/Example.R1.fq.sort.wb.fq"
-barcodedtellseqFQ2=${curP}"/test/Example.R2.fq.sort.wb.fq"
+barcodedtellseqFQ1="./Example.R1.fq.sort.wb.fq"
+barcodedtellseqFQ2="./Example.R2.fq.sort.wb.fq"
 $LRTK ALIGN -BQ1 $barcodedtellseqFQ1 -BQ2 $barcodedtellseqFQ2 -R $GRCH38 -O $outBAM -RG "@RG\tID:fo\tSM:bar" -S Yes -M Yes -P TELLSeq -T 4
 
 ############################################################# end ###############################################################
