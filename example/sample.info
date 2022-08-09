@@ -1,4 +1,4 @@
 #Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
-Example_10x	/path_to/example/LargeFQs/Example.10x.R1.fq	/path_to/example/LargeFQs/Example.10x.R2.fq	-	10x
-Example_stLFR	/path_to/example/LargeFQs/Example.stLFR.R1.fq	/path_to/example/LargeFQs/Example.stLFR.R2.fq	-	stLFR
-Example_TELLSeq /path_to/example/LargeFQs/Example.TellSeq.R1.fq	/path_to/example/LargeFQs/Example.TellSeq.R2.fq /path_to/example/LargeFQs/Example.TellSeq.index.fq TELLSeq
+Example_10x	/path_to/example/LargeFQs/Example.large.10x.R1.fq	/path_to/example/LargeFQs/Example.large.10x.R2.fq	-	10x
+Example_stLFR	/path_to/example/LargeFQs/Example.large.stLFR.R1.fq	/path_to/example/LargeFQs/Example.large.stLFR.R2.fq	-	stLFR
+Example_TELLSeq /path_to/example/LargeFQs/Example.large.TELLSeq.R1.fq	/path_to/example/LargeFQs/Example.large.TELLSeq.R2.fq /path_to/example/LargeFQs/Example.large.TELLSeq.index.fq TELLSeq
