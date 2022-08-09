@@ -16,6 +16,14 @@ rawTELLSeqFQ1="./example/FQs/Example.TELLSeq.R1.fq"
 rawTELLSeqFQ2="./example/FQs/Example.TELLSeq.R2.fq"
 rawTELLSeqFQi="./example/FQs/Example.TELLSeq.index.fq"
 
+raw10xFQ1_large="./example/LargeFQs/Example.large.10x.R1.fq"
+raw10xFQ2_large="./example/LargeFQs/Example.large.10x.R2.fq"
+rawstLFRFQ1_large="./example/LargeFQs/Example.large.stLFR.R1.fq"
+rawstLFRFQ2_large="./example/LargeFQs/Example.large.stLFR.R2.fq"  
+rawTELLSeqFQ1_large="./example/LargeFQs/Example.large.TELLSeq.R1.fq"  
+rawTELLSeqFQ2_large="./example/LargeFQs/Example.large.TELLSeq.R2.fq"  
+rawTELLSeqFQi_large="./example/LargeFQs/Example.large.TELLSeq.index.fq" 
+
 ###output files
 outFQ1="./Example.R1.fq"
 outFQ2="./Example.R2.fq"
