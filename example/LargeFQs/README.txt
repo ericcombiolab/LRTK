@@ -1,4 +1,4 @@
-The default database can be found on zenodo (https://zenodo.org/record/6792169).
+The default database can be found on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
 The structure of database should be similar to the following directory.
 
 LargeFQs
