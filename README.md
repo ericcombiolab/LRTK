@@ -17,7 +17,7 @@ Furthermore, <a href="https://github.com/WGLab/LinkedSV"> LinkedSV </a> (Fang et
 
 
 ## Example data in Zenodo
-The required database can be downloaded from Zenodo (https://zenodo.org/record/6792169).
+The required database can be downloaded from Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
 The directory is organized as:
 ```
 database
@@ -26,7 +26,7 @@ database
 |-WhiteList
 |-Uniqness_map
 ```
-In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a small dataset (FQs) and a large dataset (LargeFQs) on Zenodo (https://zenodo.org/record/6792169). The small dataset is used to quickly test the raw read analysis module.The large data set can be used to test all the fucntions and generate the final HTML report.
+In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a small dataset (FQs) and a large dataset (LargeFQs) on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ). The small dataset is used to quickly test the raw read analysis module.The large data set can be used to test all the fucntions and generate the final HTML report.
 ```
 example
 |-FQs/
