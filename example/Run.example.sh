@@ -28,15 +28,6 @@ rawTELLSeqFQ1_large="./example/LargeFQs/Example.large.TELLSeq.R1.fq"
 rawTELLSeqFQ2_large="./example/LargeFQs/Example.large.TELLSeq.R2.fq"  
 rawTELLSeqFQi_large="./example/LargeFQs/Example.large.TELLSeq.index.fq" 
 
-### intermediate results
-barcoded10xFQ1="./Example.R1.fq.sort.wb.fq"  
-barcoded10xFQ2="./Example.R2.fq.sort.wb.fq"  
-nobarcoded10xFQ1="./Example.R1.fq.sort.wob.fq"  
-nobarcoded10xFQ2="./Example.R2.fq.sort.wob.fq"  
-
-### should be prepared by users to test the WGS command
-Sinfo="./sample.info"  
-
 ###output files
 outFQ1="./Example.R1.fq"
 outFQ2="./Example.R2.fq"
@@ -44,6 +35,21 @@ outBAM="./Example.bam"
 outVCF1="./Example.small.variants.vcf"
 outVCF2="./Example.large.variants.vcf"
 outVCF3="./Example.small.variants.phased.vcf"
+
+### intermediate results
+#barcoded10xFQ* and nobarcoded10xFQ* could be generated from the FQCONVER command.
+#The output of FQCONVER includes three pairs of FASTQ files (Example.R1/2.fq, Example.R1/2.fq.sort.wb.fq and Example.R1/2.fq.sort.wob.fq).
+#The Example.R1/2.fq contains all reads.
+#The Example.R1/2.fq.sort.wb.fq contains only reads with barcode annotation and is sorted based on the barcode sequence.
+#The Example.R1/2.fq.sort.wob.fq contains only reads without barcode annotation and is sorted based on the genomic coordinates.
+
+barcoded10xFQ1="./Example.R1.fq.sort.wb.fq"  
+barcoded10xFQ2="./Example.R2.fq.sort.wb.fq"  
+nobarcoded10xFQ1="./Example.R1.fq.sort.wob.fq"  
+nobarcoded10xFQ2="./Example.R2.fq.sort.wob.fq"  
+
+### should be prepared by users to test the WGS command
+Sinfo="./sample.info"  
 
 ###database
 BL10x="./database/WhiteList/white_list_10x_barcode.fa"
