@@ -181,7 +181,7 @@ line5: processors, the maximum number of CPUs allowed
 
 line7: CF, coverage of long DNA fragments
 
-line9: CR, covergae of short reads for each fragment
+line9: CR, coverage of short reads for each fragment
 
 line11: N_FP, average number of fragments for each droplet
 
