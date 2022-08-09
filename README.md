@@ -14,6 +14,7 @@ lrtk -h
 LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pysam, scipy and sortedcontainers. Some of them will be installed using conda automatically, including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin, 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth, 2012), HapCUT2 (Edge et al., 2017) and SAMtools (Li et al., 2009). 
 Furthermore, <a href="https://github.com/WGLab/LinkedSV"> LinkedSV </a> (Fang et al., 2019), <a href="https://github.com/deepomicslab/SpecHap"> SpecHap </a> (Yu et al., 2021) and <a href="https://github.com/BilkentCompGen/valor"> VALOR2 </a> (Karaoǧlanoǧlu et al., 2020) that are not supported by conda are needed to be installed by users. 
 
+We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa=0.7.17, fastp==0.23.2, freebayes==0.9.21, gatk==3.8, hapcut2==1.3.3, samtools==1.6, SpecHap=1.0.1, VALOR==2.1.5, whatshap==1.2.1.   
 
 
 ## Example data in Zenodo
