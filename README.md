@@ -222,7 +222,7 @@ $LRTK FQCONVER -I1 $raw10xFQ1 -I2 $raw10xFQ2 -IT 10x -O1 $outFQ1 -O2 $outFQ2 -OT
 
 -O2/--output_fastq2: Output fastq file for the second read of paired-end linked-read sequencing data.
 
--OT/--output_type: Output fastq format. The unified linked read format (ULRF) is recommended.
+-OT/--output_type: Output fastq format. Currently LRTK only supports the unified linked read format (ULRF) format. 
 
 -B/--barcodes: Path to barcode whitlist.
 
