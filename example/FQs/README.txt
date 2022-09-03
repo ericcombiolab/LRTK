@@ -10,3 +10,4 @@ FQs
 |--Example.TellSeq.R2.fq
 |--Example.TellSeq.index.fq
 |--simulation
+|--simulation_stlfr
