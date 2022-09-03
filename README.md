@@ -39,6 +39,7 @@ example
     |-Example.TELLSeq.R1.fq
     |-Example.TELLSeq.R2.fq
     |-simulation
+    |-simulation_stlfr
 |-LargeFQs
     |-Example.large.10x.R1.fq
     |-Example.large.10x.R2.fq
@@ -139,6 +140,7 @@ UNIQNESS="./database/Uniqness_map/"
 ### function 1: example for linked-read simulation
 ```
 $LRTK MKFQ -CF "./example/FQs/simulation/diploid_config" -IT 10x
+$LRTK MKFQ -CF "./example/FQs/simulation_stlfr/diploid_config" -IT stLFR
 ```
 *parameters:
 
