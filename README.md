@@ -19,7 +19,7 @@ We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa==0.7.17, fastp==0.23.
 
 ## Database and demo data 
 The required database can be downloaded from Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
-In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a human genome dataset (FQs) and a metagenomic dataset on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
+In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a human genome dataset and a metagenomic dataset on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
 
 # Running examples
 ## Help information
