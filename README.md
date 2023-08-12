@@ -68,7 +68,7 @@ LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
 
 We have prepared Two examples of config file (config1.txt and config2.txt; config1.txt is illustrated here) in the diploid_config folder.
 
-### function 2: unified linked-read format conversion
+### function 2: barcode error correction
 ```
 LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
@@ -151,7 +151,7 @@ LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OU
 -V/--vcf: VCF file generated from ```SNV``` function.
 
 
-### function 7:  variant phasing
+### function 7: barcode-assisted variant phasing
 ```
 LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
 ```
@@ -169,7 +169,7 @@ LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_
 
 -V/--vcf: VCF with variants to phase.
 
-### function 8:  metagenome assembly
+### function 8:  read-cloud metagenome assembly
 ```
 LRTK ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
 ```
