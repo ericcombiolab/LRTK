@@ -1,0 +1,4 @@
+#Barcode	FQ1	FQ2	INDEXFQ	Linked-read_tech
+Example_10x	/path_to/Example.10x.R1.fq	/path_to/Example.10x.R2.fq	-	10x
+Example_stLFR	/path_to/Example.stLFR.R1.fq	/path_to/Example.stLFR.R2.fq	-	stLFR
+Example_TELLSeq /path_to/Example.TELLSeq.R1.fq	/path_to/Example.TELLSeq.R2.fq /path_to/Example.TELLSeq.index.fq TELLSeq
