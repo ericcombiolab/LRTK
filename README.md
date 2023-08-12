@@ -2,7 +2,7 @@
 # Overview
 Linked-Read ToolKit (LRTK), is a unified and versatile toolkit to process human and metagenomic linked-read sequencing data from different linked-read sequencing technologies, including 10x Genomics, single-tube long fragment read (stLFR) and transposase enzyme linked long-read sequencing (TELL-Seq). LRTK provides functions to perform read cloud assembly, barcode-aware read alignment, reconstruction of long DNA fragments, taxonomic classification and quantification, and genomic variant calling and phasing. LRTK also has the ability to perform automatically analyze from raw sequencing data to downstream analysis and support the analysis of multiple samples in parallel. In addition, LRTK could produce publication-ready visualizations and generates reproducible reports, summarizing the key parameters at multiple checkpoints such as library preparation. 
  example
-![Main](https://github.com/CicyYeung/LinkedReadToolKit/blob/main/script/HTML/img/workflow.png)
+![Main](https://github.com/ericcombiolab/LRTK/blob/main/demo_report/img/workflow.png)
 # Install using Bioconda
 ## Bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
