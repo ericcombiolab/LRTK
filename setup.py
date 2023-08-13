@@ -19,7 +19,7 @@ setup(
     author='YANG CHAO',
     author_email='yangchaogab@gmail.com',
     packages=find_packages(),
-    install_requires=['numpy','pysam','scipy', 'scikit-learn','sortedcontainers', 'torch', 'aquila', 'bam-readcount','bcftools', 'bedtools','bwa','fastp', 'flye', 'freebayes','gatk','hapcut2','jellyfish', 'megahit', 'metabat', 'parallel','picard', 'pigz', 'quickmerge', 'r-base', 'r-ggplot2', 'r-ggforce', 'r-vegan', 'r-factoextra', 'r-proxy', 'r-clusterSim', 'samtools', 'snakemake', 'seqkt', 'spades', 'whatshap','vcflib'],
+    install_requires=['numpy','pysam', 'pytorch', 'scipy', 'scikit-learn','sortedcontainers',  'aquila', 'bam-readcount','bcftools', 'bedtools','bwa','fastp', 'flye', 'freebayes','gatk','hapcut2','jellyfish', 'megahit', 'metabat2', 'parallel','picard', 'pigz', 'quickmerge', 'r-base', 'r-ggplot2', 'r-ggforce', 'r-vegan', 'r-factoextra', 'r-proxy', 'r-clusterSim', 'samtools', 'snakemake', 'seqtk', 'spades', 'whatshap','vcflib'],
     package_data={'script' : ['*pl',
                             '*R',
                             '*cpp',
