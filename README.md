@@ -14,7 +14,7 @@ Users could also install LRTK using the environment.yaml.
 ```
 conda env create -f environment.yaml
 conda activate linkedreads
-python /path/to/lrtk -h
+python /path/to/lrtk.py -h
 ```
 ## Dependencies
 LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pandas, pysam, scipy, sklrean, snakemake, torch, and sortedcontainers. Most of them could be automatically installed using conda. including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin et al., 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth et al., 2012), HapCUT2 (Edge et al., 2017), inStrain (Olm M R et al., 2021), Pangaea (Zhang Z et al., 2022), SAMtools (Li et al., 2009). spades (<=3.15), jellyfish(2.3.0), WhatsHap (Patterson M et al., 2015). 
