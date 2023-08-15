@@ -57,4 +57,3 @@ dependencies:
     - pysam==0.16.0.1
     - rph-kmeans==1.0.0
     - scikit-learn==1.0.2
-    - setuptools==68.0.0
