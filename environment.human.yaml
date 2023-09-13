@@ -1,0 +1,21 @@
+name: testlrtk
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.6
+  - aquila
+  - bcftools
+  - bwa
+  - fastp
+  - freebayes
+  - gatk=3.6
+  - hapcut2
+  - parallel
+  - picard
+  - scipy
+  - tabix
+  - vcflib
+  - vcftools
+  - pandas
