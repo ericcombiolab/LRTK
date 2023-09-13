@@ -2,7 +2,7 @@
 # Overview
 Linked-Read ToolKit (LRTK), is a unified and versatile toolkit to process human and metagenomic linked-read sequencing data from different linked-read sequencing technologies, including 10x Genomics, single-tube long fragment read (stLFR) and transposase enzyme linked long-read sequencing (TELL-Seq). LRTK provides functions to perform read cloud assembly, barcode-aware read alignment, reconstruction of long DNA fragments, taxonomic classification and quantification, and genomic variant calling and phasing. LRTK also has the ability to perform automatically analyze from raw sequencing data to downstream analysis and support the analysis of multiple samples in parallel. In addition, LRTK could produce publication-ready visualizations and generates reproducible reports, summarizing the key parameters at multiple checkpoints such as library preparation. 
  example
-![Main](https://github.com/CicyYeung/LinkedReadToolKit/blob/main/script/HTML/img/workflow.png)
+![Main](https://github.com/ericcombiolab/LRTK/blob/main/demo_report/img/workflow.png)
 # Install using Bioconda
 ## Bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
@@ -10,8 +10,14 @@ Linked-Read ToolKit (LRTK), is a unified and versatile toolkit to process human 
 conda install -c bioconda lrtk
 lrtk -h
 ```
+Users could also install LRTK using the environment.yaml. 
+```
+conda env create -f environment.yaml
+conda activate linkedreads
+python /path/to/lrtk.py -h
+```
 ## Dependencies
-LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pandas, pysam, scipy, sklrean, snakemake, torch, and sortedcontainers. Most of them could be installed using conda automatically, including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin et al., 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth et al., 2012), HapCUT2 (Edge et al., 2017), inStrain (Olm M R et al., 2021), Pangaea (Zhang Z et al., 2022), SAMtools (Li et al., 2009). spades (<=3.15), jellyfish(2.3.0), WhatsHap (Patterson M et al., 2015). 
+LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pandas, pysam, scipy, sklrean, snakemake, torch, and sortedcontainers. Most of them could be automatically installed using conda. including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin et al., 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth et al., 2012), HapCUT2 (Edge et al., 2017), inStrain (Olm M R et al., 2021), Pangaea (Zhang Z et al., 2022), SAMtools (Li et al., 2009). spades (<=3.15), jellyfish(2.3.0), WhatsHap (Patterson M et al., 2015). 
 Furthermore, <a href="https://github.com/WGLab/LinkedSV"> LinkedSV </a> (Fang et al., 2019) and <a href="https://github.com/BilkentCompGen/valor"> VALOR2 </a> (Karaoǧlanoǧlu et al., 2020) that are not supported by conda are needed to be installed by users. 
 
 We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa==0.7.17, fastp==0.23.2, freebayes==0.9.21, gatk==3.8, hapcut2==1.3.3, samtools==1.6, VALOR==2.1.5, whatshap==1.2.1.   
@@ -19,7 +25,12 @@ We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa==0.7.17, fastp==0.23.
 
 ## Database and demo data 
 The required database can be downloaded from Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
-In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a human genome dataset (FQs) and a metagenomic dataset on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ).
+
+
+In addition, we provide several examples to test LRTK on different linked-read sequencing technologies. We have included a human genome dataset and a metagenomic dataset on Google Drive (https://drive.google.com/drive/folders/1XPW2avL_LZAt5yIh9tb35jZ5GfCSj7eQ). 
+
+
+Now the database and demo data is also available at Baidu net disk (https://pan.baidu.com/s/1B-ZRHEMGEWjS-yzTBeSIsQ?pwd=y76i).
 
 # Running examples
 ## Help information
@@ -28,7 +39,7 @@ Type "lrtk -h" and the help information will be printed.
 lrtk -h 
 ```
 ```
-usage: lrtk version 1.5
+usage: lrtk version 1.6
 
 Linked Reads ToolKit
 
@@ -63,7 +74,7 @@ LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
 
 We have prepared Two examples of config file (config1.txt and config2.txt; config1.txt is illustrated here) in the diploid_config folder.
 
-### function 2: unified linked-read format conversion
+### function 2: barcode error correction
 ```
 LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
@@ -146,7 +157,7 @@ LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OU
 -V/--vcf: VCF file generated from ```SNV``` function.
 
 
-### function 7:  variant phasing
+### function 7: barcode-assisted variant phasing
 ```
 LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
 ```
@@ -164,7 +175,7 @@ LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_
 
 -V/--vcf: VCF with variants to phase.
 
-### function 8:  metagenome assembly
+### function 8:  read-cloud metagenome assembly
 ```
 LRTK ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
 ```
