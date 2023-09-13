@@ -1,0 +1,31 @@
+name: linkedreads
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - aquila
+  - bcftools
+  - bedtools
+  - bowtie2
+  - bwa
+  - fastp
+  - freebayes
+  - gatk=3.6
+  - hapcut2
+  - megahit
+  - metabat2
+  - parallel
+  - picard
+  - python>=3.6
+  - r-ade4
+  - r-base
+  - r-clustersim
+  - r-factoextra
+  - r-ggforce
+  - r-ggplot2
+  - r-proxy
+  - r-vegan
+  - tabix
+  - vcflib
+  - vcftools
