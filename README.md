@@ -17,10 +17,10 @@ conda activate linkedreads
 python /path/to/lrtk.py -h
 ```
 ## Dependencies
-LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pandas, pysam, scipy, sklrean, snakemake, torch, and sortedcontainers. Most of them could be automatically installed using conda. including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin et al., 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth et al., 2012), HapCUT2 (Edge et al., 2017), inStrain (Olm M R et al., 2021), Pangaea (Zhang Z et al., 2022), SAMtools (Li et al., 2009). spades (<=3.15), jellyfish(2.3.0), WhatsHap (Patterson M et al., 2015). 
-Furthermore, <a href="https://github.com/WGLab/LinkedSV"> LinkedSV </a> (Fang et al., 2019) and <a href="https://github.com/BilkentCompGen/valor"> VALOR2 </a> (Karaoǧlanoǧlu et al., 2020) that are not supported by conda are needed to be installed by users. 
+LRTK is mainly implemented by python3 and requires several python packages, such as numpy, pandas, pysam, scipy,  and sortedcontainers. Most of them could be automatically installed using conda. including Aquila (Zhou et al., 2021), bcftools (Danecek et al., 2021), BWA (Li and Durbin et al., 2009), fastp (Chen et al., 2018), FreeBayes (Garrison and Marth et al., 2012), HapCUT2 (Edge et al., 2017), inStrain (Olm M R et al., 2021),  SAMtools (Li et al., 2009). spades (<=3.15).
+Furthermore, <a href="https://github.com/WGLab/LinkedSV"> LinkedSV </a> (Fang et al., 2019) and <a href="https://github.com/BilkentCompGen/valor"> VALOR2 </a> (Karaoǧlanoǧlu et al., 2020), <a href="https://github.com/ericcombiolab/Pangaea"> Pangaea </a>  (Zhang Z et al., 2022), that are not supported by conda are needed to be installed by users. 
 
-We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa==0.7.17, fastp==0.23.2, freebayes==0.9.21, gatk==3.8, hapcut2==1.3.3, samtools==1.6, VALOR==2.1.5, whatshap==1.2.1.   
+We have tested LRTK with Aquila==1.0.0, bcftools==1.8, bwa==0.7.17, fastp==0.23.2, freebayes==0.9.21, gatk==3.6, hapcut2==1.3.3, samtools==1.6, VALOR==2.1.5, whatshap==1.2.1.   
 
 
 ## Database and demo data 
