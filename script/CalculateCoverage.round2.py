@@ -40,7 +40,7 @@ for ele in sorted(coverage_dict):
 
 
 with open(outfile, 'w') as file:
-    file.write("Genome\tRelative_abundance\n")
+    ###file.write("Genome\tRelative_abundance\n")
     for ele in sorted(coverage_dict):
         if(total_cov > 0):
             relative_abundance = coverage_dict[ele] / total_cov
