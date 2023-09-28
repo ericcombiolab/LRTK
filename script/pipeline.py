@@ -37,22 +37,12 @@ def moduleMKFQ(args):
 	# To simulate linked reads
 	# for 10x
 	if(args.input_type == "10x"):
-		run_cmd([
-			"python", 
-			script_path+"simulate_reads.py",
-			args.config_file,
-			],
-			"simulate_read"
-			)
+		cmd = "python " + script_path + "simulate_reads.py " + args.config_file
+		run_cmd(cmd, "simulate_read")
 	# for stlfr
 	elif(args.input_type == "stLFR"):
-		run_cmd([
-			"python",
-			script_path+"simulate_reads_stLFR.py",
-			args.config_file,
-			],
-			"simulate_read"
-			)
+		cmd = "python " + script_path + "simulate_reads.py " + args.config_file
+		run_cmd(cmd, "simulate_read")
 
 
 def moduleBAM(args):
@@ -66,6 +56,15 @@ def moduleBAM(args):
 		alignment.metagenome_align(args.input_fastq1, args.input_fastq2, args.read_group, args.reference, args.outfile, args.sort, args.mark_duplication, args.platform, args.threads)
 	else:
 		print("Error: unknown linked-read technology!")
+
+
+def moduleRLF(args):
+	samtools_path = shutil.which("samtools")
+	cmd = "chmod 755 " + script_path + "long_fragment/construct_fragment"
+	subprocess.call(cmd, shell=True)
+
+	cmd = script_path + "long_fragment/construct_fragment" + " -d " + str(200000) + " -t " +  str(args.threads) + " --bam " + args.bam + " --output " + args.outfile + " 1>" + args.outfile + ".stat.xls"
+	run_cmd(cmd, "construct_fragment")
 
 
 def moduleSNV(args):

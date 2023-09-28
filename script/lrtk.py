@@ -62,8 +62,8 @@ def checkRLF(args):
 	else:
 		os.makedirs(dirname)
 
-	# start SNV/INDEL calling
-	#moduleSNV(args)
+	moduleRLF(args)
+
 
 def checkSNV(args):
 	# check the input bam
