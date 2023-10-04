@@ -7,7 +7,7 @@ Linked-Read ToolKit (LRTK), is a unified and versatile toolkit to process human 
 ## Bioconda install
 (Please ensure channels are properly setup for bioconda before installing)
 ```
-conda install -c bioconda lrtk
+conda install -c bioconda lrtk=2.0
 lrtk -h
 ```
 Users could also install LRTK using the environment.yaml. 
