@@ -7,7 +7,7 @@ import gzip
 from collections import defaultdict
 
 # Parameter defination
-large_droplet = 40000000
+large_droplet = 400000000
 large_template = 1000000000
 
 
