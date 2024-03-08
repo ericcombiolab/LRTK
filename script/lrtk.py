@@ -269,6 +269,8 @@ def main():
 			help='Input fastq file (uncompressed FASTQ format), the second read of paired linked-read sequencing data.')
 	align.add_argument('-RG','--read_group',default='@RG\tID:example\tSM:example',
 			help='Full read group string (e.g. @RG\tID:foo\tSM:bar)')
+	align.add_argument('-A','--application',default='ema', choices=['ema', 'lariat'],
+			help='The linked-read aligner')
 	align.add_argument('-R','--reference',required=True,
 			help='The indexed human reference genome file')
 	align.add_argument('-O','--outfile',required=True,

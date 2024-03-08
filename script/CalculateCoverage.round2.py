@@ -1,55 +1,47 @@
 import sys
 
-hash_dict = {}
-coverage_dict = {}
-read_len = 150
-
 infile = sys.argv[1]
 outfile = sys.argv[2]
 
-with open(infile, 'r') as file:
-    for line in file:
+hash = {}
+coverage = {}
+read_length = 100
+
+with open(infile, 'r') as in_file:
+    for line in in_file:
+        line = line.strip()
         if line.startswith('#'):
             continue
-        line = line.strip()
-        cols = line.split('\t')
-        ref = '_'.join(cols[0].split('_')[:2])
-        length = int(cols[2])
-        avg_depth = float(cols[6]) * read_len / length
-        
-        if ref in hash_dict:
-            hash_dict[ref].append(avg_depth)
-        else:
-            hash_dict[ref] = [avg_depth]
+        a = line.split('\t')
+        b = a[0].split('_')
+        ref = b[0] + '_' + b[1]
+        length = int(a[3])
+        avg_depth = float(a[6]) * read_length / length
 
-for ele in sorted(hash_dict):
-    array = hash_dict[ele]
-    array.sort()
-    cutoff_min = int(0.2 * (len(array) - 1))
-    cutoff_max = int(0.8 * (len(array) - 1))
-    depth_total = sum(array[cutoff_min:cutoff_max+1])
-    count = cutoff_max - cutoff_min + 1
-    depth_mean = depth_total / count
-    coverage_dict[ele] = depth_mean
+        if ref in hash:
+            hash[ref] += ',' + str(avg_depth)
+        else:
+            hash[ref] = str(avg_depth)
 
 total_cov = 0
-for ele in sorted(coverage_dict):
-    if coverage_dict[ele] == 0 or coverage_dict[ele] < 10:
-        continue
-    total_cov += coverage_dict[ele]
+for ele in sorted(hash.keys()):
+    array = list(map(float, hash[ele].split(',')))
+    array_sort = sorted(array)
+    cutoff_min = int(0.2 * len(array))
+    cutoff_max = int(0.8 * len(array))
+    depth_total, count = 0, 0
+    for i in range(cutoff_min, cutoff_max + 1):
+        depth_total += array_sort[i]
+        count += 1
+    depth_mean = depth_total / count
+    coverage[ele] = depth_mean
+    total_cov += depth_mean
 
-
-with open(outfile, 'w') as file:
-    ###file.write("Genome\tRelative_abundance\n")
-    for ele in sorted(coverage_dict):
-        if(total_cov > 0):
-            relative_abundance = coverage_dict[ele] / total_cov
-        else:
-            relative_abundance = 0
-
-        if relative_abundance < 0.0001:
+with open(outfile, 'w') as out_file:
+    out_file.write("#Genome\tDepth\tRelativeAbundance\n")
+    for ele in sorted(coverage.keys()):
+        if coverage[ele] == 0:
             continue
-        if coverage_dict[ele] == 0 or coverage_dict[ele] < 10:
-            continue
-        
-        file.write(f"{ele}\t{relative_abundance}\n")
+        ratio = coverage[ele] / total_cov
+        out_file.write(f"{ele}\t{coverage[ele]}\t{ratio}\n")
+

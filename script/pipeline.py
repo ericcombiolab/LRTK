@@ -46,16 +46,23 @@ def moduleMKFQ(args):
 
 
 def moduleBAM(args):
-	if((args.platform == "10x") and (args.genome == "human")):
+	if((args.platform == "10x") and (args.genome == "human") and (args.application == "ema")):
 		alignment.align_10x(args.input_fastq1, args.input_fastq2, args.read_group, args.reference, args.outfile, args.sort, args.mark_duplication, args.threads)
-	elif(args.platform == "stLFR" and (args.genome == "human")):
+	elif(args.platform == "stLFR" and (args.genome == "human") and (args.application == "ema")):
 		alignment.align_stLFR(args.input_fastq1, args.input_fastq2, args.read_group, args.reference, args.outfile, args.sort, args.mark_duplication, args.threads)
-	elif(args.platform == "TELLSeq" and (args.genome == "human")):
+	elif(args.platform == "TELLSeq" and (args.genome == "human") and (args.application == "ema")):
 		alignment.align_TELLSeq(args.input_fastq1, args.input_fastq2, args.read_group, args.reference, args.outfile, args.sort, args.mark_duplication, args.threads)
-	elif(args.genome == "metagenome"):
+	elif(args.genome == "metagenome" and (args.application == "ema")):
 		alignment.metagenome_align(args.input_fastq1, args.input_fastq2, args.read_group, args.reference, args.outfile, args.sort, args.mark_duplication, args.platform, args.threads)
+	elif(args.genome == "metagenome" and (args.application == "lariat")):
+		alignment.align_lariat_metagenome(args.input_fastq1, args.input_fastq2, args.reference, args.outfile, args.platform, args.threads)
+	elif(args.genome == "human" and (args.application == "lariat")):
+		alignment.align_lariat_human(args.input_fastq1, args.input_fastq2, args.reference, args.outfile, args.platform, args.threads)
 	else:
-		print("Error: unknown linked-read technology!")
+		print("Error: unknown parameter!\n")
+		print(args.platform)
+		print(args.genome)
+		print(args.application)
 
 
 def moduleRLF(args):
