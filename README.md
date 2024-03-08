@@ -63,11 +63,12 @@ optional arguments:
 ```
 LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
 ```
-* Required parameters
+* #### Required parameters
 
--CF/--config_file: The path to config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
-
--IT/--input_type: Platform. Users can choose from 10x or stLFR.
+#### -CF/--config_file: 
+The path to config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
+#### -IT/--input_type:
+ Platform. Users can choose from 10x or stLFR.
 
 We have prepared Two examples of config file (config1.txt and config2.txt; config1.txt is illustrated here) in the diploid_config folder.
 
