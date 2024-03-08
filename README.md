@@ -100,7 +100,7 @@ Output fastq file for the second read of paired-end linked-read sequencing data.
 ```
 LRTK ALIGN -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -R /path_to/REFERENCE -O /path_to/OUT_BAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
-* #### parameters:
+* #### Required parameters:
 
 #### -FQ1/--input_fastq1:  
 Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data (without barcode).
@@ -124,86 +124,113 @@ Input sequencing technology. Users can choose from (10x,stLFR, TELLSeq).
 ```
 LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
 ```
-* Required parameters
+* #### Required parameters
 
--B/--bam: The alignment file (.bam) obtained using barcode aware approach.  
+#### -B/--bam: 
+The alignment file (.bam) obtained using barcode aware approach.  
 
--D/--distance: the distance for seed extension 
+#### -D/--distance: 
+the distance for seed extension 
 
--O/--outfile:  The reconstructed fragments.  
+#### -O/--outfile:  
+The reconstructed fragments.  
 
 ### function 5: small variation calling
 ```
 LRTK SNV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "FreeBayes" -T 4 -O /path_to/OUT_VCF
 ```
-* Required parameters
+* #### Required parameters
 
--B/--bam: The alignment file (.bam) obtained from ALIGN function.  
+#### -B/--bam: 
+The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: Reference genome.
+#### -R/--reference: 
+Reference genome.
 
--A/--application: The SNV/INDEL caller (FreeBayes, Samtools or GATK).
+#### -A/--application: 
+The SNV/INDEL caller (FreeBayes, Samtools or GATK).
 
--O/--outfile: Output VCF file.
+#### -O/--outfile: 
+Output VCF file.
 
 ### function 6: structural variation calling
 ```
 LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OUT_VCF -V /path_to/IN_VCF -U /path_to/DATABASE_UNIQNESS
 ```
-* Required parameters
+* #### Required parameters
 
--B/--bam: The alignment file (.bam) obtained from ALIGN function.  
+#### -B/--bam: 
+The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: Reference genome.
+#### -R/--reference: 
+Reference genome.
 
--A/--application: The SV caller (Aquila, LinkedSV or VALOR).
+#### -A/--application: 
+The SV caller (Aquila, LinkedSV or VALOR).
 
--O/--outfile: Output VCF file.
+#### -O/--outfile: 
+Output VCF file.
 
--U/--uniqness: "Uniqness_map/" is a required database for Aquila, which can be downloaded from Google Drive.
+#### -U/--uniqness: 
+"Uniqness_map/" is a required database for Aquila, which can be downloaded from Google Drive.
 
--S/--sonic: "sonic/" is a required database for VALOR, which can be downloaded from Google Drive.
+#### -S/--sonic: 
+"sonic/" is a required database for VALOR, which can be downloaded from Google Drive.
 
--V/--vcf: VCF file generated from ```SNV``` function.
+#### -V/--vcf: 
+VCF file generated from ```SNV``` function.
 
 
 ### function 7:  variant phasing
 ```
 LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
 ```
-* Required parameters
+* #### Required parameters
 
--B/--bam: The alignment file (.bam) obtained from ALIGN function.  
+#### -B/--bam: 
+The alignment file (.bam) obtained from ALIGN function.  
 
--R/--reference: Reference genome.
+#### -R/--reference: 
+Reference genome.
 
--A/--application: The variant phasing tool (HapCUT2, WhatsHap or SpecHap).
+#### -A/--application: 
+The variant phasing tool (HapCUT2, WhatsHap or SpecHap).
 
--T/--threads: The number of threads used for variant phasing tool (default: 1). 
+#### -T/--threads:
+The number of threads used for variant phasing tool (default: 1). 
 
--O/--outfile: Output phased VCF file.
+#### -O/--outfile: 
+Output phased VCF file.
 
--V/--vcf: VCF with variants to phase.
+#### -V/--vcf: 
+VCF with variants to phase.
 
 ### function 8:  metagenome assembly
 ```
 LRTK ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
 ```
-* Required parameters
+* #### Required parameters
 
-  -FQ1/--fq1:        Input FASTQ1 file (uncompressed FASTQ format).
+  #### -FQ1/--fq1:
+  Input FASTQ1 file (uncompressed FASTQ format).
   
-  -FQ2/--fq2:        Input FASTQ2 file (uncompressed FASTQ format).
+  #### -FQ2/--fq2:
+  Input FASTQ2 file (uncompressed FASTQ format).
   
-  -MS/--metaspades:   assembled contigs from metaspades.
+  #### -MS/--metaspades:
+  assembled contigs from metaspades.
   
-  -AL/--athena_l:     local assembled contigs from athena.
+  #### -AL/--athena_l:
+  local assembled contigs from athena.
   
-  -AH/--athena_h:     hybrid assembled contigs from athena.
+  #### -AH/--athena_h:
+  hybrid assembled contigs from athena.
   
-  -LT/--low_abd_cut:  coverage for low abundance contigs.
+  #### -LT/--low_abd_cut:
+  coverage for low abundance contigs.
   
-  -O/ --outfile:      the final assembled contigs.
+  #### -O/ --outfile:
+  the final assembled contigs.
 
 ## Commands for automatic analysis pipeline
 LRTK provides an easy-to-use automatic pipeline to process linked-read sequencing from single or multiple samples. Users only need to prepare FASTQ files, LRTK will run the whole pipeline and generate the final report. We show simple examples to process human and metagenome sequencing data using the automatic pipeline. 
@@ -212,14 +239,18 @@ LRTK provides an easy-to-use automatic pipeline to process linked-read sequencin
 ```
 LRTK WGS -SI /path_to/SAMPLE_INFO -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:Example\tSM:Example" 
 ```
-*parameters Required parameters
--OD/--outdir: The output directory.
+* #### Required parameters
+#### -OD/--outdir: 
+The output directory.
 
--DB/--database: The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Zenodo.
+#### -DB/--database: 
+The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Zenodo.
 
--RG/--read_group: Read group (e.g. '@RG\tID:foo\tSM:bar').
+#### -RG/--read_group: 
+Read group (e.g. '@RG\tID:foo\tSM:bar').
 
--SI/--sample_info: The path to Sinfo (sample information file).
+#### -SI/--sample_info: 
+The path to Sinfo (sample information file).
 
 The Sinfo (tab-separated) should be prepared as: 
 ```
@@ -230,17 +261,22 @@ Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	
 ```
 LRTK MWGS -SI /path_to/SingleSample_info -MI /path_to/MultipleSample_info -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:foo\tSM:bar"
 ```
-* Required parameters
+* #### Required parameters
 
--OD/--outdir: The output directory.
+#### -OD/--outdir: 
+The output directory.
 
--DB/--database: The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Google Drive.
+#### -DB/--database: 
+The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Google Drive.
 
--RG/--read_group: Read group (e.g. '@RG\tID:foo\tSM:bar').
+#### -RG/--read_group: 
+Read group (e.g. '@RG\tID:foo\tSM:bar').
 
--SI/--sample_info: The path to Sinfo (sample information file).
+#### -SI/--sample_info: 
+The path to Sinfo (sample information file).
 
--MI/--multi_info: The path to Sinfo (sample information file).
+#### -MI/--multi_info: 
+The path to Sinfo (sample information file).
 
 The Sinfo (tab-separated) should be prepared as:
 ```
