@@ -68,7 +68,7 @@ LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
 #### -CF/--config_file: 
 The path to config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
 #### -IT/--input_type:
- Platform. Users can choose from 10x or stLFR.
+Sequencing platform. Users can choose from 10x or stLFR.
 
 We have prepared Two examples of config file (config1.txt and config2.txt; config1.txt is illustrated here) in the diploid_config folder.
 
@@ -118,7 +118,7 @@ The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Z
 The output alignment file.  
 
 #### -P/--platform: 
-Input sequencing technology. Users can choose from (10x,stLFR, TELLSeq).
+Sequencing platforms. Users can choose from (10x,stLFR, TELLSeq).
 
 ### function 4: Reconstruction of long DNA fragment
 ```
@@ -127,7 +127,7 @@ LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
 * #### Required parameters
 
 #### -B/--bam: 
-The alignment file (.bam) obtained using barcode aware approach.  
+The alignment file (.bam) mapped using barcode aware approach.  
 
 #### -D/--distance: 
 the distance for seed extension 
