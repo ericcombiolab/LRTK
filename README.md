@@ -63,7 +63,7 @@ optional arguments:
 ```
 LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
 ```
-*parameters:
+* Required parameters
 
 -CF/--config_file: The path to config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
 
@@ -75,7 +75,7 @@ We have prepared Two examples of config file (config1.txt and config2.txt; confi
 ```
 LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
-*parameters:
+* Required parameters
 
 -I1/--input_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired-end linked-read sequencing data.
 
@@ -111,7 +111,7 @@ LRTK ALIGN -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -R /path_to/REFERENCE -O /p
 ```
 LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
 ```
-*parameters:
+* Required parameters
 
 -B/--bam: The alignment file (.bam) obtained using barcode aware approach.  
 
@@ -123,7 +123,7 @@ LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
 ```
 LRTK SNV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "FreeBayes" -T 4 -O /path_to/OUT_VCF
 ```
-*parameters
+* Required parameters
 
 -B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
@@ -137,7 +137,7 @@ LRTK SNV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "FreeBayes" -T 4 -O /path_t
 ```
 LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OUT_VCF -V /path_to/IN_VCF -U /path_to/DATABASE_UNIQNESS
 ```
-*parameters
+* Required parameters
 
 -B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
@@ -158,7 +158,7 @@ LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OU
 ```
 LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
 ```
-*parameters
+* Required parameters
 
 -B/--bam: The alignment file (.bam) obtained from ALIGN function.  
 
@@ -176,7 +176,7 @@ LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_
 ```
 LRTK ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
 ```
-*parameters
+* Required parameters
 
   -FQ1/--fq1:        Input FASTQ1 file (uncompressed FASTQ format).
   
@@ -199,7 +199,7 @@ LRTK provides an easy-to-use automatic pipeline to process linked-read sequencin
 ```
 LRTK WGS -SI /path_to/SAMPLE_INFO -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:Example\tSM:Example" 
 ```
-*parameters
+*parameters Required parameters
 -OD/--outdir: The output directory.
 
 -DB/--database: The ```database``` contains reference genome and barcode whitelist, which can be downloaded from Zenodo.
@@ -217,7 +217,7 @@ Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	
 ```
 LRTK MWGS -SI /path_to/SingleSample_info -MI /path_to/MultipleSample_info -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:foo\tSM:bar"
 ```
-*parameters
+* Required parameters
 
 -OD/--outdir: The output directory.
 
