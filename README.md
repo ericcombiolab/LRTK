@@ -72,7 +72,7 @@ The path to config_files for linked-read simulation. Example data was stored on 
 
 We have prepared Two examples of config file (config1.txt and config2.txt; config1.txt is illustrated here) in the diploid_config folder.
 
-### function 2: unified linked-read format conversion
+### function 2: barcode correction
 ```
 LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
