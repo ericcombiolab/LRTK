@@ -76,37 +76,49 @@ We have prepared Two examples of config file (config1.txt and config2.txt; confi
 ```
 LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
-* Required parameters
+* #### Required parameters
 
--I1/--input_fastq1: Input fastq file (uncompressed FASTQ format) for the first read of paired-end linked-read sequencing data.
+#### -I1/--input_fastq1: 
+Input file (uncompressed FASTQ format) for the first read of paired-end linked-read sequencing data.
 
--I2/--input_fastq2: Input fastq file (uncompressed FASTQ format) for the second read of paired-end linked-read sequencing data.
+#### -I2/--input_fastq2: 
+Input file (uncompressed FASTQ format) for the second read of paired-end linked-read sequencing data.
 
--ID/--index_fastq: Input index file (uncompressed FASTQ format) for paired linked-read sequencing data. This files only contains information about barcode sequence.
+#### -ID/--index_fastq: 
+Input index file (uncompressed FASTQ format) for paired linked-read sequencing data. This files only contains information about barcode sequence and is required for TELL-Seq technology.
 
--IT/--input_type: Platforms. Users can choose from 10x,stLFR or TELLSeq.
+#### -IT/--input_type: 
+Sequencing platforms. Users can choose from 10x,stLFR, or TELLSeq.
 
--O1/--output_fastq1: Output fastq file for the first read of paired-end linked-read sequencing data.
+#### -O1/--output_fastq1: 
+Output fastq file for the first read of paired-end linked-read sequencing data.
 
--O2/--output_fastq2: Output fastq file for the second read of paired-end linked-read sequencing data.
+#### -O2/--output_fastq2: 
+Output fastq file for the second read of paired-end linked-read sequencing data.
 
 ### function 3: barcode-aware alignment
 ```
 LRTK ALIGN -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -R /path_to/REFERENCE -O /path_to/OUT_BAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
-*parameters:
+* #### parameters:
 
--FQ1/--input_fastq1:  Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data (without barcode).
+#### -FQ1/--input_fastq1:  
+Input fastq file (uncompressed FASTQ format) for the first read of paired linked-read sequencing data (without barcode).
 
--FQ2/--input_fastq2:  Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data (without barcode).
+#### -FQ2/--input_fastq2:  
+Input fastq file (uncompressed FASTQ format) for the second read of paired linked-read sequencing data (without barcode).
 
--RG/--read_group:  Full read group string (e.g. '@RG\tID:foo\tSM:bar')
+#### -RG/--read_group:  
+Full read group string (e.g. '@RG\tID:foo\tSM:bar')
 
--R/--reference:  The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
+#### -R/--reference:  
+The recommended "GRCH38/genome.fa" is the reference fasta file downloaded from Zenodo.
 
--O/--outfile:  The output alignment file.  
+#### -O/--outfile:  
+The output alignment file.  
 
--P/--platform: Input sequencing technology. Users can choose from (10x,stLFR,TELLSeq).
+#### -P/--platform: 
+Input sequencing technology. Users can choose from (10x,stLFR, TELLSeq).
 
 ### function 4: Reconstruction of long DNA fragment
 ```
