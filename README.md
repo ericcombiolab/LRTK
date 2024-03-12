@@ -36,7 +36,7 @@ Type "lrtk -h" and the help information will be printed.
 lrtk -h 
 ```
 ```
-usage: lrtk version 1.9
+usage: lrtk version 2.1
 
 Linked Reads ToolKit
 
