@@ -221,7 +221,7 @@ def checkMWGS(args):
 	moduleMWGS(args)
 
 def main():
-	parser = argparse.ArgumentParser(description="Linked Reads ToolKit",usage="lrtk version 2.0\n",conflict_handler='resolve')
+	parser = argparse.ArgumentParser(description="Linked Reads ToolKit",usage="lrtk version 2.1\n",conflict_handler='resolve')
 	subparsers = parser.add_subparsers()
 
 	# MKFQ section
