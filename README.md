@@ -120,6 +120,9 @@ The output alignment file.
 #### -P/--platform: 
 Sequencing platforms. Users can choose from (10x,stLFR, TELLSeq).
 
+#### -A/--application:
+Barcode-aware aligners. Users can choose from (ema, lariat). 
+
 ### function 4: Reconstruction of long DNA fragment
 ```
 LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
