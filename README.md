@@ -61,7 +61,7 @@ optional arguments:
 
 ### function 1: linked-read simulation
 ```
-LRTK MKFQ -CF "/path_to/diploid_config" -IT stLFR
+lrtk MKFQ -CF "/path_to/diploid_config" -IT stLFR
 ```
 * #### Required parameters
 
@@ -74,7 +74,7 @@ We have prepared Two examples of config file (config1.txt and config2.txt; confi
 
 ### function 2: barcode correction
 ```
-LRTK FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
+lrtk FQCONVER -I1 /path_to/IN_FQ1 -I2 /path_to/INF_Q2 -IT 10x -O1 /path_to/OUT_FQ1 -O2 /path_to/OUT_FQ2 -B /path_to/BARCODE_WHITELIST -T 4 
 ```
 * #### Required parameters
 
@@ -98,7 +98,7 @@ Output fastq file for the second read of paired-end linked-read sequencing data.
 
 ### function 3: barcode-aware alignment
 ```
-LRTK ALIGN -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -R /path_to/REFERENCE -O /path_to/OUT_BAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
+lrtk ALIGN -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -R /path_to/REFERENCE -O /path_to/OUT_BAM -RG "@RG\tID:Example\tSM:Example" -P 10x -T 4
 ```
 * #### Required parameters:
 
@@ -125,7 +125,7 @@ Barcode-aware aligners. Users can choose from (ema, lariat).
 
 ### function 4: Reconstruction of long DNA fragment
 ```
-LRTK RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
+lrtk RLF -B /path_to/IN_BAM -D 200000 -O /path_to/OUTFILE
 ```
 * #### Required parameters
 
@@ -140,7 +140,7 @@ The reconstructed fragments.
 
 ### function 5: small variation calling
 ```
-LRTK SNV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "FreeBayes" -T 4 -O /path_to/OUT_VCF
+lrtk SNV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "FreeBayes" -T 4 -O /path_to/OUT_VCF
 ```
 * #### Required parameters
 
@@ -158,7 +158,7 @@ Output VCF file.
 
 ### function 6: structural variation calling
 ```
-LRTK SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OUT_VCF -V /path_to/IN_VCF -U /path_to/DATABASE_UNIQNESS
+lrtk SV -B /path_to/IN_BAM -R /path_to/REFERENCE -A "Aquila" -T 4 -O /path_to/OUT_VCF -V /path_to/IN_VCF -U /path_to/DATABASE_UNIQNESS
 ```
 * #### Required parameters
 
@@ -186,7 +186,7 @@ VCF file generated from ```SNV``` function.
 
 ### function 7:  variant phasing
 ```
-LRTK PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
+lrtk PHASE -B /path_to/IN_BAM -R /path_to/REFERENCE -A "HapCUT2" -V /path_to/IN_VCF -O /path_to/OUT_VCF
 ```
 * #### Required parameters
 
@@ -210,7 +210,7 @@ VCF with variants to phase.
 
 ### function 8:  metagenome assembly
 ```
-LRTK ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
+lrtk ASSEMBLY -FQ1 /path_to/IN_FQ1 -FQ2 /path_to/IN_FQ2 -MS /path_to/METASPADES_CONTIG -AL /path_to/ATHENA_LOCAL_CONTIG -AH /path_to/ATHENA_HYBRID_CONTIG -LT LOW_ABD_CUT -O OUTFILE
 ```
 * #### Required parameters
 
@@ -240,7 +240,7 @@ LRTK provides an easy-to-use automatic pipeline to process linked-read sequencin
 
 ### function 9：human genome workflow
 ```
-LRTK WGS -SI /path_to/SAMPLE_INFO -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:Example\tSM:Example" 
+lrtk WGS -SI /path_to/SAMPLE_INFO -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:Example\tSM:Example" 
 ```
 * #### Required parameters
 #### -OD/--outdir: 
@@ -262,7 +262,7 @@ Example_10x	/path_to/Example.large.10x.R1.fq	/path_to/Example.large.10x.R2.fq	-	
 ```
 ### function 10: metagenome workflow
 ```
-LRTK MWGS -SI /path_to/SingleSample_info -MI /path_to/MultipleSample_info -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:foo\tSM:bar"
+lrtk MWGS -SI /path_to/SingleSample_info -MI /path_to/MultipleSample_info -OD /path_to/OUTDIR -DB /path_to/DATABASE -RG "@RG\tID:foo\tSM:bar"
 ```
 * #### Required parameters
 
