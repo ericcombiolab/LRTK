@@ -66,7 +66,7 @@ lrtk MKFQ -CF "/path_to/diploid_config" -IT stLFR
 * #### Required parameters
 
 #### -CF/--config_file: 
-The path to config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
+The path to the directory containing config_files for linked-read simulation. Example data was stored on the aforementioned Google Drive.
 #### -IT/--input_type:
 Sequencing platform. Users can choose from 10x or stLFR.
 
